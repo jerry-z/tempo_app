@@ -1,0 +1,214 @@
+openapi: 3.0.0
+info:
+  description: Initial swagger file for COMS6998 Project
+  version: 1.0.0
+  title: tempo app
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: jz2966@columbia.edu
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+# Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/tempo_app/tempo_api_v1/1.0.0
+tags:
+  - name: home
+    description: Everything about user newsfeed
+  - name: create a story
+    description: All operations to upload and create a story
+  - name: user
+    description: Everything about User profile
+  - name: login
+    description: Everything to login/logout/create user
+
+paths:
+  /home:
+    get:
+      tags:
+        - home
+      summary: Returns users newsfeed
+      description: Returns a list of newsfeed ids
+      operationId: getNewsfeed
+      parameters:
+        - name: user_id
+          in: query
+          description: generates user's newsfeed
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+      security:
+        - api_key: []
+  /home/post:
+    get:
+      tags:
+        - home
+      summary: access a specific post on the newsfeed
+      description: Returns a list of newsfeed ids
+      operationId: getPost
+      parameters:
+        - name: post_id
+          in: query
+          description: redirects to dynamic page with post info
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      tags:
+        - home
+      summary: add a comment to a post
+      operationId: addComment
+      responses:
+        '400':
+          description: empty comment
+    patch:
+      tags:
+        - home
+      summary: like or unlike a post
+      operationId: likePost
+      responses:
+        '200':
+          description: successfully liked/unliked
+  /create_story/image:
+    post:
+      tags:
+        - create a story
+      summary: upload an image
+      operationId: uploadImage
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+    get:
+      tags:
+        - create a story
+      summary: use image to get a song
+      operationId: getMusicfromImage
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /create_story/music:
+    post:
+      tags:
+        - create a story
+      summary: search spotify api for music
+      operationId: searchMusic
+      responses:
+        '200':
+          description: successful spotify search
+          content:
+            application/json:
+              schema:
+                type: object
+  /users/{user_id}:
+    get:
+      tags:
+        - user
+      summary: Returns users profile page
+      operationId: getProfile
+      parameters:
+        - name: user_id
+          in: path
+          description: generates user's newsfeed
+          required: true
+          schema:
+            type: object
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+  /user/login:
+    get:
+      tags:
+        - login
+      summary: Logs user into the system
+      operationId: loginUser
+      parameters:
+        - name: username
+          in: query
+          description: The user name for login
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: The password for login in clear text
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the user
+              schema:
+                type: integer
+                format: int32
+            X-Expires-After:
+              description: date in UTC when token expires
+              schema:
+                type: string
+                format: date-time
+          content:
+            application/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+        '400':
+          description: Invalid username/password supplied
+  /user/logout:
+    get:
+      tags:
+        - login
+      summary: Logs out current logged in user session
+      operationId: logoutUser
+      responses:
+        default:
+          description: successful operation          
+  /user:
+    post:
+      tags:
+        - login
+      summary: Create user account
+      operationId: createUser
+      responses:
+        default:
+          description: successful operation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        description: Created user object
+        required: true
