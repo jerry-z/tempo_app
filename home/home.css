@@ -1,0 +1,16 @@
+  .divider{
+    margin: 0.3cm 0cm 0.7cm 1.8cm;
+  }
+
+  .musicbtn {
+  background-color: #ffffff; /* Blue background */
+  border: none; /* Remove borders */
+  color: #4F46A8;; /* White text */
+  padding: 1px 5px; /* Some padding */
+  font-size: 20px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+}
+
+.text-small {
+  font-size: 70%;
+}

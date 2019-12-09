@@ -1,0 +1,31 @@
+
+
+html,
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn3 {
+background-color: #2E2963; /* Blue background */
+border: none; /* Remove borders */
+color: white; /* White text */
+padding: 16px 80px; /* Some padding */
+font-size: 16px; /* Set a font size */
+cursor: pointer; /* Mouse pointer on hover */
+text-align: center;
+}
+/* Darker background on mouse-over */
+.btn3:hover {
+  background-color: RoyalBlue;
+}
+
+.image-upload > input
+{
+    display: none;
+}
+
+.image-upload img
+{
+    cursor: pointer;
+}

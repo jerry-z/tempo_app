@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../main.css" rel="stylesheet"  type="text/css">
+  <link href="upload.css" rel="stylesheet"  type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.css">
+  <title>Tempo | Upload</title>
+
+</head>
+
+<body>
+  <div class="header" id="myHeader">
+    <img class="mb-4" src="../imgs/logo.jpg" alt="" width="150" class="center" >
+  </div>
+  <script type="text/javascript" src="../main.js"></script>
+
+  <div class="content">
+   <h2 class="mt-5 mb-3 text-muted text-center">NEW SONGBOARD</h2>
+  </div>
+
+  <div id="addContain" class="card text-center mx-auto" style="width: 25rem;" >
+      <div class="card-body text-dark" >
+          <div class="card image-upload">
+              <label for='file-input'>
+                <img id='addPic' class="card-img-top" src="../imgs/img_upload.JPG">
+              </label>
+              <input id="file-input" onchange="document.getElementById('addPic').src = window.URL.createObjectURL(this.files[0])" type="file" name="avatar" accept="image/jpg, image/png">
+          </div>
+      </div>
+  </div>
+
+
+  <center>
+  <div>
+    <button class="btn3 mx-auto"><i class="fab fa-spotify fa-2x"></i></button>
+    <button class="btn3 mx-auto"><i class="fa fa-cloud fa-2x"></i></button>
+
+  </div>  
+</center>
+
+
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1"></label>
+    <textarea class="form-control mx-auto" style="width: 28rem;" id="exampleFormControlTextarea1" placeholder="Write a caption..." rows="3"></textarea>
+
+  </div>
+
+  <button class="btn btn-lg btn-dark btn-block  mx-auto" style="width: 28rem;" type="submit">POST</button>
+
+
+  <div class="footer">
+    <button class="btn1"><i class="fa fa-home fa-2x" onclick="goto_home()"></i></button>
+    <button class="btn1"><i class="fa fa-search fa-2x" onclick="goto_search()"></i></button>
+    <button class="btn2"><i class="fa fa-plus-square fa-2x" onclick="goto_upload()"></i></button>
+    <button class="btn1"><i class="fa fa-user fa-2x" onclick="goto_user()"></i></button>
+  </div>
+
+
+</body>
+</html>

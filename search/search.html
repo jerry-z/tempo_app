@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="home.css" rel="stylesheet"  type="text/css">
+  <link href="../main.css" rel="stylesheet"  type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <title>Tempo | Search</title>
+
+</head>
+
+<body>
+  <div class="header" id="myHeader">
+    <img class="mb-4" src="../imgs/logo.jpg" alt="" width="150" class="center" >
+  </div>
+  <script type="text/javascript" src="../main.js"></script>
+  <center>
+
+      <div class="input-group">
+        <input id='searchValue' type="text"
+               class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary"><i class="fa fa-search" onclick="goto_search()"></i></button>
+        </div>
+      </div>
+      
+      <div class="btn-group-justified w-100">
+        <div class="btn-group btn-group-toggle w-100" data-toggle="buttons">
+          <label class="btn btn-outline-secondary active">
+            <input type="radio" name="options" id="option1" autocomplete="off" checked> Accounts
+          </label>
+          <label class="btn btn-outline-secondary">
+            <input type="radio" name="options" id="option2" autocomplete="off"> Music
+          </label>
+        </div>
+      </div>
+
+  </center> 
+
+  <div class="footer">
+    <button class="btn1"><i class="fa fa-home fa-2x" onclick="goto_home()"></i></button>
+    <button class="btn2"><i class="fa fa-search fa-2x" onclick="goto_search()"></i></button>
+    <button class="btn1"><i class="fa fa-plus-square fa-2x" onclick="goto_upload()"></i></button>
+    <button class="btn1"><i class="fa fa-user fa-2x" onclick="goto_user()"></i></button>
+  </div>
+
+
+</body>
+</html>

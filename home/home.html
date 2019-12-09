@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="home.css" rel="stylesheet"  type="text/css">
+  <link href="../main.css" rel="stylesheet"  type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+
+
+  <title>Tempo | Home</title>
+
+</head>
+
+<body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="js/scripts.js"></script>
+
+  <div class="header" id="myHeader">
+    <img class="mb-4" src="../imgs/logo.jpg" alt="" width="150" class="center" >
+    <script type="text/javascript" src="../main.js"></script>
+  </div>
+
+
+  <div id="post1" class="card mx-auto" style="width: 30rem;" >
+      <div class="card-body text-dark" >
+         <img id ="account_pic" class="rounded-circle pull-left"  style="width: 3rem;" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
+          data-holder-rendered="true">
+          <p id = "account_username" class = " font-weight-bold divider">kanye.west</p>
+          <p></p>
+          <p class="text-md-left">Had a great time!</p>
+          <div class="card image-upload text-center border-0">
+              <label for='file-input'>
+                <img id='addPic' class="card-img-top " src="https://tempo-app-images.s3.amazonaws.com/chee.jpg">
+              </label>
+          </div>
+        <button class="musicbtn pull-right"><i class="fa fa-play-circle"></i></button>
+        <img class="pull-left " src="../imgs/audiologo.png" style="width: 1.3rem;margin-top:0.2cm;">
+        <p id = "song_name_artist" style="margin-top:0.25cm;" class="text-small font-weight-bold text-center">Animals - Martin Garrix</p>
+        <p></p>
+        <i onclick="likebutton(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+        <i class="fa-2x far fa-comment"style="margin-left:3cm;"></i>
+        <i onclick="savebutton(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+      </div>
+  </div>
+
+
+
+  <div class="footer">
+    <button class="btn2"><i class="fa fa-home fa-2x" onclick="goto_home()"></i></button>
+    <button class="btn1"><i class="fa fa-search fa-2x" onclick="goto_search()"></i></button>
+    <button class="btn1"><i class="fa fa-plus-square fa-2x" onclick="goto_upload()"></i></button>
+    <button class="btn1"><i class="fa fa-user fa-2x" onclick="goto_user()"></i></button>
+  </div>
+
+
+</body>
+</html>
