@@ -28,14 +28,26 @@
 
   <center>
   <div class="card-body text-dark" >
-         <img id ="account_pic" class="rounded-circle"  style="width: 5rem;margin-top:0.2cm;" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
+    <div class="btn-group dropleft pull-right">
+  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fas fa-cog"></i>
+  </button>
+  <div class="dropdown-menu">
+    <button onclick="editprofile()" class="dropdown-item" type="button">Edit Profile</button>
+    <button onclick="logout()" class="dropdown-item text-danger" type="button">Logout</button>
+  </div>
+</div>
+
+         <img id ="account_pic" class="rounded-circle"  style="width: 5rem;margin-left:1.5cm;margin-top:0.2cm;" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
           data-holder-rendered="true">
           <h5 id = "account_username" style="margin-top:0.2cm;" class = " font-weight-bold divider">kanye.west</h5> 
   </div>
   <p id = "user_profile_description" style="margin-left:1cm;margin-right:1cm;margin-bottom:1cm;" class="text-small" >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
-
+</center>
 <!-- TABS      -->
 
+
+<center>
 <ul class="nav nav-tabs nav-justified md-tabs indigo" id="myTabJust" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="user-posts-tab-just" data-toggle="tab" href="#user-posts-just" role="tab" aria-controls="user-posts-just"

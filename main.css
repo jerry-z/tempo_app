@@ -24,6 +24,11 @@ body {
   padding: 16px;
 }
 
+.image-upload > input
+{
+    display: none;
+}
+
 .sticky {
   position: fixed;
   top: 0;
