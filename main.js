@@ -43,3 +43,24 @@ function savebutton(x) {
 
 }
 
+
+function savemusicbutton(x) {
+  if ( x.classList.contains( "fa-circle") ) {
+        x.classList.remove( "fa-circle" );
+        x.classList.remove( "far" );
+
+        x.classList.add( "fa-record-vinyl" );
+        x.classList.add( "fas" );
+
+    }
+    else {
+        x.classList.remove( "fa-record-vinyl" );
+        x.classList.remove( "fas" );
+
+        x.classList.add( "far" );
+        x.classList.add( "fa-circle" );
+    }
+
+}
+
+

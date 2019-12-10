@@ -17,6 +17,8 @@
     <img class="mb-4" src="../imgs/logo.jpg" alt="" width="150" class="center" >
   </div>
   <script type="text/javascript" src="../main.js"></script>
+  <script type="text/javascript" src="upload.js"></script>
+
 
   <div class="content">
    <h2 class="mt-5 mb-3 text-muted text-center">NEW SONGBOARD</h2>
@@ -28,7 +30,7 @@
               <label for='file-input'>
                 <img id='addPic' class="card-img-top" src="../imgs/img_upload.JPG">
               </label>
-              <input id="file-input" onchange="document.getElementById('addPic').src = window.URL.createObjectURL(this.files[0])" type="file" name="avatar" accept="image/jpg, image/png">
+              <input id="file-input" onchange="document.getElementById('addPic').src = window.URL.createObjectURL(this.files[0]); uploadPhoto();" type="file" name="avatar" accept="image/jpg, image/png">
           </div>
       </div>
   </div>
