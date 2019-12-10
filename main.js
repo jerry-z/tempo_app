@@ -64,3 +64,18 @@ function savemusicbutton(x) {
 }
 
 
+
+function followuserbutton(x) {
+  if ( x.classList.contains( "fa-check") ) {
+        x.classList.remove( "fa-check" );
+        x.classList.add( "fa-user-plus" );
+
+    }
+    else {
+        x.classList.remove( "fa-user-plus" );
+
+        x.classList.add( "fa-check" );
+    }
+
+}
+
