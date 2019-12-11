@@ -89,50 +89,82 @@ function logout(){
 }
 
 
+function updatePost(data, i){
+    let j = i + 1;
+    var api_postid = data['StoryId'];
+    var api_userid = data['UserId'];
+    var api_post_desc = data['txtdata'];
+    var api_post_profpic  = 'https://music-user-image.s3.amazonaws.com/' + api_userid +'.jpg';
+    var api_post_pic = data['imagedata'];
+    console.log('asdfas', api_post_pic)
+    var api_post_music_url = data['musicdata']['url'];
+
+    let postid = 'post' + j + '_id';
+    visible = document.getElementById(postid)
+    visible.classList.remove("invisible")
+
+    let postuser = 'post' + j + '_user';
+    document.getElementById(postuser).innerHTML = api_userid;
+
+    let postdesc = 'post' + j + '_desc';
+    document.getElementById(postdesc).innerHTML = api_post_desc;
+
+    let post_userpic = 'post' + j + '_profpic' 
+    document.getElementById(post_userpic).src = api_post_profpic;
+
+    let post_pic = 'post' + j + '_pic' 
+    document.getElementById(post_pic).src = api_post_pic;
+
+    let post_music = 'post' + j + '_music_url' 
+    document.getElementById(post_music).src = api_post_music_url;
+
+     /**
+    var post1_bookmark = false //save button  ,get + post 
+    document.getElementById('post1_bookmark').innerHTML = post1_bookmark;
+
+    var post1_likes = '' //like button, get + post
+    document.getElementById('post1_likes').innerHTML = post1_likes; 
+    **/
+}
 
 
 // API GATEWAY FUNCTIONS
 
 //Global
 var user_name = 'therealobama';
-document.getElementById('account_username').innerHTML = user_name;
+//document.getElementById('account_username').innerHTML = user_name;
 
 var bio = 'This is my bio; etc';
-document.getElementById('bio').innerHTML = bio;
+//document.getElementById('bio').innerHTML = bio;
 
 var profpic = 'https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg';
-document.getElementById('profpic').innerHTML = profpic;
+//document.getElementById('profpic').innerHTML = profpic;
 
 
 //Home
+var user = "davit666lwh";
+var body = {
+      "messages": [
+        {
+          "request_type": "get_public_news_feed",
+          "unconstructed": {
+            "user_id": user
+          }
+        }
+      ]
+    };
+ 
 
+var apigClient = apigClientFactory.newClient();
 function getPostInfo(){
-    //post1 GET FUNCTIONS
-    var post1_id = '123123'; //GET FROM API GATEWAY RESPONSE
-    var post1 =document.getElementById('post1_id')
-    post1.name = post1_id;
-    post1.classList.remove("invisible");
+    apigClient.getNewsfeedPost({},body, {}).then((res)=>{
+                console.log(res);
+                data = res['data']['body'];
+                var i;
+                for (i = 0; i < data.length; i++) {
+                    updatePost(data[i],i);
+                }
 
-    var post1_user = 'defaultusername'; //GET FROM API GATEWAY RESPONSE
-    document.getElementById('post1_user').innerHTML = post1_user;
-
-    var post1_desc = 'post description'; //GET FROM API GATEWAY RESPONSE
-    document.getElementById('post1_desc').innerHTML = post1_desc;
-
-    var post1_profpic = 'https://www.biography.com/.image/t_share/MTE4MDAzNDEwNzg5ODI4MTEw/barack-obama-12782369-1-402.jpg'; //GET FROM API GATEWAY RESPONSE
-    document.getElementById('post1_profpic').src = post1_profpic;
-
-    var post1_pic = 'https://3.bp.blogspot.com/-zNIwfDE53Hk/XCoHSUkZVaI/AAAAAAAADgE/d7z0EnTFKxQpgTs6uKaa_FzrUAc3MD5ngCHMYCw/s1600/pretty-scenic-wallpaper-and-screensavers-amazing-wallpaper-hd.jpg'; //GET FROM API GATEWAY RESPONSE
-    document.getElementById('post1_pic').src = post1_pic;
-
-    var post1_music_url = 'https://open.spotify.com/embed/track/1Vk4yRsz0iBzDiZEoFMQyv?si=sG0HNtydR8yd8lyEHf0l-A' //GET FROM API GATEWAY RESPONSE
-    document.getElementById('post1_music_url').src = post1_music_url;
-
-    var post1_bookmark = false //save button  ,get + post 
-    document.getElementById('post1_bookmark').innerHTML = post1_bookmark;
-
-    var post1_likes = '' //like button, get + post
-    document.getElementById('post1_likes').innerHTML = post1_likes;
+            })
+ 
 }
-//Search
-
