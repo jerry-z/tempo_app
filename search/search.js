@@ -7,7 +7,7 @@ function search(){
 }
 
 // #############################Search Users##########################################################
-
+var userInfoList;
 
 var account_search_body = {
   "messages": [
@@ -33,9 +33,11 @@ function user_search(){
                 console.log(res);
                 data = res['data']['body'];
                 var i;
+                userInfoList = new Array(10);
                 for (i = 0; i < data.length && i<10; i++) {
-                    update_search_accounts(data[i],i);
+                    userInfoList[i] = update_search_accounts(data[i],i);
                 }
+                console.log(userInfoList)
 
             })
  
@@ -67,9 +69,13 @@ function update_search_accounts(data, j){
 		x.classList.add( "fa-check" );
 	}
 
+
+    return api_username
+
     //let adduser = 'search' + j + '_adduser' 
     //document.getElementById(adduser).src = api_adduser; // 
 }
+
 
 
 // ######################### Search Music ###########################################333
@@ -129,7 +135,7 @@ function update_search_music(data,j){
 
 function followuserbuttoncustomized(x) {
     let button_id = x.id.replace("search","")[0]
-    let friend_id = 
+    let friend_id = userInfoList[button_id]
     console.log(button_id)
 
     if ( x.classList.contains( "fa-check") ) {
