@@ -472,3 +472,30 @@ function newcomment3(post) {
             })
 }
 
+function deletePost(id){
+    var story_id = info_user[id]["StoryId"]
+    console.log(story_id)
+
+
+
+    let delete_post_body = {
+      "messages": [
+        {
+          "request_type": "delete_story",
+          "unconstructed": {
+            "user_id": user_val,
+            "story_id": story_id,
+          }
+        }
+      ]
+    }
+
+    apigClient.editStoryPost({},delete_post_body, {}).then((res)=>{
+                console.log(res);
+                data = res['data']['body'];
+                console.log(data)
+
+
+            })
+    goto_user()
+}

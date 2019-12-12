@@ -280,5 +280,7 @@ function uploadStory() {
             });
 
 
+    goto_upload();
+
     }
 

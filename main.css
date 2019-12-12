@@ -89,6 +89,18 @@ body {
   cursor: pointer; /* Mouse pointer on hover */
 }
 
+.cbtn2 {
+  background-color: #fff; /* Blue background */
+  border: none; /* Remove borders */
+  color: black; /* White text */
+  padding: 5px 10px; /* Some padding */
+  font-size: 16px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+}
+
+.cbtn2:hover {
+  color: red;
+}
 
 .fa-heart{
   cursor: pointer;
