@@ -1,11 +1,12 @@
 
 var apigClient = apigClientFactory.newClient();
 var infoList = new Array(10);
+var ai_infoList = new Array(10);
 
 function gotouploadsearch(){
     let urlinfo = window.location.search;
     let searchparams = new URLSearchParams(urlinfo)
-    flag = document.getElementById('inputflag').value;
+    let flag = document.getElementById('inputflag').value;
     if (flag !== 'none'){
         let img = 'https://music-tmp.s3.amazonaws.com/tmp.jpg';
         location.href = 'upload_search.html' + user_key + '&music_url=None' + '&image_url=' + img;
@@ -26,6 +27,23 @@ function addmusicupload(n){
     let img = searchparams.get("image_url")
 
     let allinfo = infoList[n];
+    let music_url = allinfo[0]
+    let artist = allinfo[1]
+    let song = allinfo[2]
+    let albumpic = allinfo[3]
+
+    location.href = 'upload.html' + user_key + '&image_url=' + img + '&music_url=' + music_url
+                 + '&artist=' + artist +'&song=' + song + '&albumpic=' + albumpic;
+
+}
+
+function ai_addmusicupload(n){
+    //, artist, song, albumpic
+    let urlinfo = window.location.search;
+    let searchparams = new URLSearchParams(urlinfo)
+    let img = searchparams.get("image_url")
+
+    let allinfo = ai_infoList[n];
     let music_url = allinfo[0]
     let artist = allinfo[1]
     let song = allinfo[2]
@@ -142,16 +160,79 @@ function helper(n){
         return [url,artist,song,albumpic]
       }
 
+function ai_update_search_music(data,j){
+
+    let search_music_id = 'ai_search' + j + '_music_id';
+    let visible = document.getElementById(search_music_id)
+    visible.classList.remove("invisible")
+
+    var api_song= data['song']; // 
+    var api_artist= data['artist']; // 
+    var api_album= data['album_pic'];
+    var api_add_song= data['url']; //
+
+    let song = 'ai_search' + j + '_song' 
+    console.log(song,j) 
+
+    document.getElementById(song).innerHTML = api_song;
+
+    let artist = 'ai_search' + j + '_artist' 
+    document.getElementById(artist).innerHTML = api_artist;
+
+    let album = 'ai_search' + j + '_album' ;
+    document.getElementById(album).src = api_album;
+
+    let songurl = 'ai_search' + j + '_url';
+    document.getElementById(songurl).value = api_add_song;
+    console.log(api_add_song)
+
+    return ai_helper(j)
+}
 
 
-function ai_music_search(){
+function ai_helper(n){
+        let url = document.getElementById('ai_search' + n + '_url').value
+        let artist = document.getElementById('ai_search' + n + '_artist').innerHTML
+        let song = document.getElementById('ai_search' + n + '_song').innerHTML
+        let albumpic = document.getElementById('ai_search' + n + '_album').src
+        return [url,artist,song,albumpic]
+      }
+
+
+
+function go_to_ai_search(){
+    
+    location.href = 'ai_search.html';
+    let flag = document.getElementById('inputflag').value;
+    if (flag !== 'none'){
+        let img = 'https://music-tmp.s3.amazonaws.com/tmp.jpg';
+        location.href = 'upload_search.html' + user_key + '&music_url=None' + '&image_url=' + img;
+
+    } else {
+        let img = 'none';
+        location.href = 'ai_search.html' + user_key + '&music_url=None' + '&image_url=' + img;
+
+    }
+    
+}
+
+
+function generate_ai_results(){
     let aibody = {
       "key1": "value1",
       "key2": "value2",
       "key3": "value3"
     }
     apigClient.rekognitionSearchPost({},aibody, {}).then(function(result){
-              console.log('success')
+              console.log('success ai')
+              console.log(result);
+              let data = result['data']['body'];
+              let i;
+              ai_infoList = new Array(10);
+              for (i = 0; i < data.length && i<10; i++) {
+                    ai_infoList[i] = ai_update_search_music(data[i],i);
+                }
+
             }).catch( function(result){
                 console.log('fail')
             });
