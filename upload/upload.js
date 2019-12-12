@@ -202,11 +202,10 @@ function ai_helper(n){
 
 function go_to_ai_search(){
     
-    location.href = 'ai_search.html';
     let flag = document.getElementById('inputflag').value;
     if (flag !== 'none'){
         let img = 'https://music-tmp.s3.amazonaws.com/tmp.jpg';
-        location.href = 'upload_search.html' + user_key + '&music_url=None' + '&image_url=' + img;
+        location.href = 'ai_search.html' + user_key + '&music_url=None' + '&image_url=' + img;
 
     } else {
         let img = 'none';
