@@ -138,7 +138,8 @@ function updatePost(data, i){
     console.log(collection_list)
     if (like_list.indexOf(user_val) >= 0){
         console.log("!!!!!!!!!!!!!")
-        let x = document.getElementById("likebuttom_" + j)
+        let x = document.getElementById("likebutton_" + j)
+        console.log(x)
         x.classList.remove( "fa-heart-o" );
         x.classList.add( "fa-heart" );
 

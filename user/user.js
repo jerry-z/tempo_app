@@ -19,7 +19,7 @@ function getUserPostInfo(){
                 console.log(user_val)
                 data = res['data']['body'];
                 var i;
-                for (i = 0; i < data.length && i<2; i++) {
+                for (i = 0; i < data.length && i<10; i++) {
                     updatePost(data[i],i);
                 }
 
