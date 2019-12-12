@@ -51,10 +51,11 @@
         <input id='searchValue' type="text"
                class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
         <div class="input-group-append">
-            <button class="btn btn-outline-secondary"><i class="fa fa-search" onclick="music_search()"></i></button>
+            <button class="btn btn-outline-secondary"><i class="fa fa-search" onclick="music_search(document.getElementById('searchValue').value);console.log('AAA',helper(0));"></i></button>
         </div>
       </div>
 
+    
     
 
     <!-- Upload search0 -->
@@ -66,7 +67,7 @@
        <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search0_artist"></span></p>
        <data id= "search0_url" value=""></data>
 
-       <button type="button" onclick="addmusicupload(document.getElementById('search0_url').value);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+       <button type="button" onclick="addmusicupload(0);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
       </div>
     </div>
 
@@ -79,7 +80,7 @@
        <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search1_artist"></span></p>
        <data id= "search1_url" value=""></data>
 
-       <button type="button" onclick="addmusicupload(document.getElementById('search1_url').value);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+       <button type="button" onclick="addmusicupload(1);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
       </div>
     </div>
 
@@ -93,7 +94,7 @@
        <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search2_artist"></span></p>
        <data id= "search2_url" value=""></data>
 
-       <button type="button" onclick="addmusicupload(document.getElementById('search2_url').value);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+       <button type="button" onclick="addmusicupload(2);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
       </div>
     </div>
 
@@ -106,7 +107,7 @@
        <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search3_artist"></span></p>
        <data id= "search3_url" value=""></data>
 
-       <button type="button" onclick="addmusicupload(document.getElementById('search3_url').value);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+       <button type="button" onclick="addmusicupload(3);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
       </div>
     </div>
 
@@ -119,7 +120,7 @@
        <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search4_artist"></span></p>
        <data id= "search4_url" value=""></data>
 
-       <button type="button" onclick="addmusicupload(document.getElementById('search4_url').value);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+       <button type="button" onclick="addmusicupload(4);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
       </div>
     </div>
 
@@ -132,7 +133,7 @@
        <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search5_artist"></span></p>
        <data id= "search5_url" value=""></data>
 
-       <button type="button" onclick="addmusicupload(document.getElementById('search5_url').value);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+       <button type="button" onclick="addmusicupload(5);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
       </div>
     </div>
 
@@ -145,7 +146,7 @@
        <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search6_artist"></span></p>
        <data id= "search6_url" value=""></data>
 
-       <button type="button" onclick="addmusicupload(document.getElementById('search6_url').value);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+       <button type="button" onclick="addmusicupload(6);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
       </div>
     </div>
 
@@ -158,7 +159,7 @@
        <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search7_artist"></span></p>
        <data id= "search7_url" value=""></data>
 
-       <button type="button" onclick="addmusicupload(document.getElementById('search7_url').value);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+       <button type="button" onclick="addmusicupload(7);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
       </div>
     </div>
 
@@ -171,7 +172,7 @@
        <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search8_artist"></span></p>
        <data id= "search8_url" value=""></data>
 
-       <button type="button" onclick="addmusicupload(document.getElementById('search8_url').value);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+       <button type="button" onclick="addmusicupload(8);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
       </div>
     </div>
 
@@ -184,7 +185,7 @@
        <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search9_artist"></span></p>
        <data id= "search9_url" value=""></data>
 
-       <button type="button" onclick="addmusicupload(document.getElementById('search9_url').value);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+       <button type="button" onclick="addmusicupload(9);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
       </div>
     </div>
 

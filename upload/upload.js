@@ -1,6 +1,6 @@
 
 var apigClient = apigClientFactory.newClient();
-
+var infoList = new Array(10);
 
 function gotouploadsearch(){
     let urlinfo = window.location.search;
@@ -19,11 +19,20 @@ function gotouploadsearch(){
 
 
 
-function addmusicupload(music){
-    let  urlinfo = window.location.search;
+function addmusicupload(n){
+    //, artist, song, albumpic
+    let urlinfo = window.location.search;
     let searchparams = new URLSearchParams(urlinfo)
     let img = searchparams.get("image_url")
-    location.href = 'upload.html' + user_key + '&music_url=' + music + '&image_url=' + img;
+
+    let allinfo = infoList[n];
+    let music_url = allinfo[0]
+    let artist = allinfo[1]
+    let song = allinfo[2]
+    let albumpic = allinfo[3]
+
+    location.href = 'upload.html' + user_key + '&image_url=' + img + '&music_url=' + music_url
+                 + '&artist=' + artist +'&song=' + song + '&albumpic=' + albumpic;
 
 }
 //https://music-tmp.s3.amazonaws.com/tmp.jpg
@@ -67,25 +76,28 @@ function updateupload(){
 }
 
 
-var music_body = {
-  "messages": [
-    {
-      "request_type": "search_music",
-      "unconstructed": {
-        "user_id": user_val,
-        "search_content": "pokemon"
-      }
-    }
-  ]
-}
 
-function music_search(){
+
+function music_search(text){
+
+    let music_body = {
+      "messages": [
+        {
+          "request_type": "search_music",
+          "unconstructed": {
+            "user_id": user_val,
+            "search_content": text
+          }
+        }
+      ]
+    }
     apigClient.getMusicPost({},music_body, {}).then((res)=>{
                 console.log(res);
                 data = res['data']['body'];
                 var i;
+                infoList = new Array(10);
                 for (i = 0; i < data.length && i<10; i++) {
-                    update_search_music(data[i],i);
+                    infoList[i] = update_search_music(data[i],i);
                 }
 
             })
@@ -118,5 +130,56 @@ function update_search_music(data,j){
     document.getElementById(songurl).value = api_add_song;
     console.log(api_add_song)
 
-
+    return helper(j)
 }
+
+
+function helper(n){
+        url = document.getElementById('search' + n + '_url').value
+        artist = document.getElementById('search' + n + '_artist').innerHTML
+        song = document.getElementById('search' + n + '_song').innerHTML
+        albumpic = document.getElementById('search' + n + '_album').src
+        return [url,artist,song,albumpic]
+      }
+
+
+
+function uploadStory() {
+    let urlinfo = window.location.search;
+    let searchparams = new URLSearchParams(urlinfo)
+    let music_url = searchparams.get("music_url");
+    let song = searchparams.get("song");
+    let artist = searchparams.get("artist");
+    let albumpic = searchparams.get("albumpic");
+
+    
+    let body = {
+          "messages": [
+            {
+              "request_type": "whatever",
+              "unconstructed": {
+                "user_id": user_val,
+                "new_story": {
+                  "txt": document.getElementById('caption_text').value,
+                  "img": "S3",
+                  "msc": {
+                    "album_pic": albumpic,
+                    "artist": artist,
+                    "song": song,
+                    "url": music_url
+                  }
+                }
+              }
+            }
+          ]
+        }
+
+    console.log(body)
+    apigClient.uploadStoryPost({},body, {}).then(function(result){
+              console.log('success')
+            }).catch( function(result){
+                console.log('fail')
+            });
+
+
+    }
