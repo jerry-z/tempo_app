@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../main.css" rel="stylesheet"  type="text/css">
+
+<!-- API GATEWAY-->
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/axios/dist/axios.standalone.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/CryptoJS/rollups/hmac-sha256.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/CryptoJS/rollups/sha256.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/CryptoJS/components/hmac.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/CryptoJS/components/enc-base64.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/url-template/url-template.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/apiGatewayCore/sigV4Client.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/apiGatewayCore/apiGatewayClient.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/apiGatewayCore/simpleHttpClient.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/apiGatewayCore/utils.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/apigClient.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.css">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <title>Tempo | AI Search</title>
+
+</head>
+
+<body>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+  <div class="header" id="myHeader">
+    <img class="mb-4" src="../imgs/logo.jpg" alt="" width="150" class="center" >
+  </div>
+  <script type="text/javascript" src="../main.js"></script>
+  <script type="text/javascript" src="upload.js"></script>
+
+  <center>
+    <img src="https://static.thenounproject.com/png/1503825-200.png">
+    <p class = 'text-muted' style="margin-bottom:0.5cm">ai-powered music search</p>
+
+    <button style="margin-bottom:1cm" class="btn btn-outline-dark btn-lg" onclick="generate_ai_results()">Generate Results</button>
+
+    
+    <!-- Upload search0 -->
+    <div id="ai_search0_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="ai_search0_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="ai_search0_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="ai_search0_artist"></span></p>
+       <data id= "ai_search0_url" value=""></data>
+
+       <button type="button" onclick="ai_addmusicupload(0);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+      </div>
+    </div>
+
+    <!-- Upload ai_search1 -->
+    <div id="ai_search1_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="ai_search1_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="ai_search1_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="ai_search1_artist"></span></p>
+       <data id= "ai_search1_url" value=""></data>
+
+       <button type="button" onclick="ai_addmusicupload(1);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+      </div>
+    </div>
+
+
+    <!-- Upload ai_search2 -->
+    <div id="ai_search2_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="ai_search2_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="ai_search2_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="ai_search2_artist"></span></p>
+       <data id= "ai_search2_url" value=""></data>
+
+       <button type="button" onclick="ai_addmusicupload(2);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+      </div>
+    </div>
+
+    <!-- Upload ai_search3 -->
+    <div id="ai_search3_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="ai_search3_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="ai_search3_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="ai_search3_artist"></span></p>
+       <data id= "ai_search3_url" value=""></data>
+
+       <button type="button" onclick="ai_addmusicupload(3);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+      </div>
+    </div>
+
+    <!-- Upload ai_search4 -->
+    <div id="ai_search4_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="ai_search4_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="ai_search4_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="ai_search4_artist"></span></p>
+       <data id= "ai_search4_url" value=""></data>
+
+       <button type="button" onclick="ai_addmusicupload(4);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+      </div>
+    </div>
+
+    <!-- Upload ai_search5 -->
+    <div id="ai_search5_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="ai_search5_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="ai_search5_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="ai_search5_artist"></span></p>
+       <data id= "ai_search5_url" value=""></data>
+
+       <button type="button" onclick="ai_addmusicupload(5);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+      </div>
+    </div>
+
+    <!-- Upload ai_search6 -->
+    <div id="ai_search6_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="ai_search6_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="ai_search6_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="ai_search6_artist"></span></p>
+       <data id= "ai_search6_url" value=""></data>
+
+       <button type="button" onclick="ai_addmusicupload(6);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+      </div>
+    </div>
+
+        <!-- Upload ai_search7 -->
+    <div id="ai_search7_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="ai_search7_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="ai_search7_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="ai_search7_artist"></span></p>
+       <data id= "ai_search7_url" value=""></data>
+
+       <button type="button" onclick="ai_addmusicupload(7);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+      </div>
+    </div>
+
+        <!-- Upload ai_search8 -->
+    <div id="ai_search8_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="ai_search8_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="ai_search8_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="ai_search8_artist"></span></p>
+       <data id= "ai_search8_url" value=""></data>
+
+       <button type="button" onclick="ai_addmusicupload(8);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+      </div>
+    </div>
+
+        <!-- Upload ai_search9 -->
+    <div id="ai_search9_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="ai_search9_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="ai_search9_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="ai_search9_artist"></span></p>
+       <data id= "ai_search9_url" value=""></data>
+
+       <button type="button" onclick="ai_addmusicupload(9);" style="margin-top:0.5cm;" class="pull-right btn btn-outline-dark">Add</button>
+      </div>
+    </div>
+
+  <div class="card card-body"></div>
+
+
+        <script>var img = window.location.hash.substring(1);
+
+          console.log(localStorage.getItem('flag'))
+
+          </script>
+
+
+    </div>  
+
+
+
+  </center> 
+
+  <div class="footer">
+    <button class="btn1"><i class="fa fa-home fa-2x" onclick="goto_home()"></i></button>
+    <button class="btn1"><i class="fa fa-search fa-2x" onclick="goto_search()"></i></button>
+    <button class="btn2"><i class="fa fa-plus-square fa-2x" onclick="goto_upload()"></i></button>
+    <button class="btn1"><i class="fa fa-user fa-2x" onclick="goto_user()"></i></button>
+  </div>
+
+
+</body>
+</html>
