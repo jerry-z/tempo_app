@@ -132,6 +132,16 @@ function update_search_music(data,j){
 
     let add_song = 'search' + j + '_adduser' 
     document.getElementById(add_song).src = api_add_song; //
+    let favorited = data['favorited']
+
+    if (favorited == true){
+        let x = document.getElementById("search" +j+ "_addmusic")// .classList.contains("fa-circle")
+        x.classList.remove( "fa-circle" );
+        x.classList.remove( "far" );
+
+        x.classList.add( "fa-record-vinyl" );
+        x.classList.add( "fas" );
+    }
 
 }
 
