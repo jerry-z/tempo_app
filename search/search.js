@@ -126,3 +126,55 @@ function update_search_music(data,j){
 
 }
 
+
+function followuserbuttoncustomized(x) {
+    let button_id = x.id.replace("search","")[0]
+    let friend_id = 
+    console.log(button_id)
+
+    if ( x.classList.contains( "fa-check") ) {
+        var valid = false
+    }
+    else {
+        var valid = true
+    }
+
+
+
+
+    var add_friend_body={
+      "messages": [
+        {
+          "request_type": "add_friend",
+          "unconstructed": {
+            "user_id": "davit666lwh",
+            "new_friend": friend_id,
+            "friend_valid": valid
+          }
+        }
+      ]
+    }    
+
+    apigClient.editUserPost({},add_friend_body, {}).then((res)=>{
+                console.log(res);
+                data = res['data']['body'];
+                console.log(data)
+                
+
+            })
+
+
+
+
+    if ( x.classList.contains( "fa-check") ) {
+        x.classList.remove( "fa-check" );
+        x.classList.add( "fa-user-plus" );
+
+    }
+    else {
+        x.classList.remove( "fa-user-plus" );
+
+        x.classList.add( "fa-check" );
+    }
+
+}
