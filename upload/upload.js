@@ -205,11 +205,13 @@ function go_to_ai_search(){
     let flag = document.getElementById('inputflag').value;
     if (flag !== 'none'){
         let img = 'https://music-tmp.s3.amazonaws.com/tmp.jpg';
-        location.href = 'ai_search.html' + user_key + '&music_url=None' + '&image_url=' + img;
+        location.href = 'ai_search.html' + user_key + '&music_url=None' + '&image_url=' + img
+                        + '&caption=' +document.getElementById('caption_text').value;
 
     } else {
         let img = 'none';
-        location.href = 'ai_search.html' + user_key + '&music_url=None' + '&image_url=' + img;
+        location.href = 'ai_search.html' + user_key + '&music_url=None' + '&image_url=' + img 
+                        + '&caption=' +document.getElementById('caption_text').value;
 
     }
     
@@ -217,10 +219,12 @@ function go_to_ai_search(){
 
 
 function generate_ai_results(){
+    let  urlinfo = window.location.search;
+    let searchparams = new URLSearchParams(urlinfo)
+    let txt = searchparams.get("caption");
+    console.log('text!!',txt)
     let aibody = {
-      "key1": "value1",
-      "key2": "value2",
-      "key3": "value3"
+      "text": txt
     }
     apigClient.rekognitionSearchPost({},aibody, {}).then(function(result){
               console.log('success ai')
