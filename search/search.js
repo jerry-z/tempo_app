@@ -7,28 +7,27 @@ function search(){
 }
 
 // #############################Search Users##########################################################
-var userInfoList;
+var userInfoList = [];
 
-var account_search_body = {
-  "messages": [
-    {
-      "request_type": "search_users",
-      "unconstructed": {
-        "user_id": user_val,
-        "search_content": 'jz',
-        "new_friend": {
-          "user_id": "xyz",
-          "first_name": "Xupeng",
-          "last_name": "Ai"
-        },
-        "friend_valid": false
-      }
-    }
-  ]
-}
+
 
 function user_search(){
-	console.log('asdf1')
+
+    let account_search_body = {
+      "messages": [
+        {
+          "request_type": "search_users",
+          "unconstructed": {
+            "user_id": user_val,
+            "search_content": document.getElementById('searchValue').value,
+            
+          }
+        }
+      ]
+    }
+
+
+
     apigClient.getUserPost({},account_search_body, {}).then((res)=>{
                 console.log(res);
                 data = res['data']['body'];
@@ -37,7 +36,6 @@ function user_search(){
                 for (i = 0; i < data.length && i<10; i++) {
                     userInfoList[i] = update_search_accounts(data[i],i);
                 }
-                console.log(userInfoList)
 
             })
  
@@ -76,29 +74,34 @@ function update_search_accounts(data, j){
     //document.getElementById(adduser).src = api_adduser; // 
 }
 
-
+var musicInfoList = [];
 
 // ######################### Search Music ###########################################333
-var music_body = {
-  "messages": [
-    {
-      "request_type": "search_music",
-      "unconstructed": {
-        "user_id": user_val,
-        "search_content": "pokemon"
-      }
-    }
-  ]
-}
+
 
 var apigClient = apigClientFactory.newClient();
 function music_search(){
+
+    let music_body = {
+      "messages": [
+        {
+          "request_type": "search_music",
+          "unconstructed": {
+            "user_id": user_val,
+            "search_content": document.getElementById('searchValue').value
+          }
+        }
+      ]
+    }
+
+
     apigClient.getMusicPost({},music_body, {}).then((res)=>{
                 console.log(res);
                 data = res['data']['body'];
                 var i;
                 for (i = 0; i < data.length && i<10; i++) {
                     update_search_music(data[i],i);
+                    musicInfoList[i] = data[i];
                 }
 
             })
@@ -153,7 +156,7 @@ function followuserbuttoncustomized(x) {
         {
           "request_type": "add_friend",
           "unconstructed": {
-            "user_id": "davit666lwh",
+            "user_id": user_val,
             "new_friend": friend_id,
             "friend_valid": valid
           }
@@ -181,6 +184,60 @@ function followuserbuttoncustomized(x) {
         x.classList.remove( "fa-user-plus" );
 
         x.classList.add( "fa-check" );
+    }
+
+}
+
+
+function savemusicbuttoncustomized(x) {
+    let button_id = x.id.replace("search","")[0]
+    let music = musicInfoList[button_id]
+    delete music["favorited"]
+    // console.log(button_id)
+    // console.log(music)
+    if ( x.classList.contains( "fa-circle") ) {
+        var valid = true
+    }
+    else {
+        var valid = false
+    }
+    console.log(valid)
+
+    let add_music_body = {
+      "messages": [
+        {
+          "request_type": "add_favorite_music",
+          "unconstructed": {
+            "user_id": user_val,
+            "add_music": valid,
+            "musicdata": music
+          }
+        }
+      ]
+    }
+
+    apigClient.getMusicPost({},add_music_body, {}).then((res)=>{
+                console.log(res);
+                data = res['data']['body'];
+                console.log(data)
+                
+
+            })
+
+    if ( x.classList.contains( "fa-circle") ) {
+        x.classList.remove( "fa-circle" );
+        x.classList.remove( "far" );
+
+        x.classList.add( "fa-record-vinyl" );
+        x.classList.add( "fas" );
+
+    }
+    else {
+        x.classList.remove( "fa-record-vinyl" );
+        x.classList.remove( "fas" );
+
+        x.classList.add( "far" );
+        x.classList.add( "fa-circle" );
     }
 
 }
