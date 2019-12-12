@@ -46,7 +46,7 @@ function likebuttoncustomized(x) {
 function savebuttoncustomized(x) {
     let id = x.id.split('_')[1]
     console.log(id)
-    let story_id = homePostInfoList[id]["StoryId"]
+    var story_id = homePostInfoList[id]["StoryId"]
     console.log(story_id)
 
     if ( x.classList.contains( "far") ) {
@@ -90,3 +90,28 @@ function savebuttoncustomized(x) {
     }
 
 }
+
+
+// function newcomment(post) {
+//     document.getElementById(post + '_new_comment').innerHTML = document.getElementById(post +'_comment').value;
+//     document.getElementById(post+'_new_com_userid').innerHTML = user_val;
+//     document.getElementById(post+'_new_com_img').src = 'https://s3.amazonaws.com/music-user-image/' + user_val+ '.jpg';
+
+//     let body = {
+//                   "messages": [
+//                     {
+//                       "request_type": "add_comment",
+//                       "unconstructed": {
+//                         "user_id": user_val,
+//                         "story_id": "story15761181622955399",
+//                         "comment": document.getElementById(post +'_comment').value
+//                       }
+//                     }
+//                   ]
+//                 }
+
+//     apigClient.editStoryPost 
+
+// }
+
+

@@ -29,7 +29,7 @@
 
 </head>
 
-<body onload="loadUserPage()">
+<body onload="loadUserPage();fav_music_search();">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   
 
@@ -41,7 +41,11 @@
   <div class="header" id="myHeader">
     <img class="mb-4" src="../imgs/logo.jpg" alt="" width="150" class="center" >
   <script type="text/javascript" src="../main.js"></script>
+  <script type="text/javascript" src="../home/home.js"></script>
   <script type="text/javascript" src="user.js"></script>
+  <script type="text/javascript" src="../search/search.js"></script>
+
+
 
 
   </div>
@@ -77,52 +81,101 @@
       aria-selected="false"><i class="fas fa-2x fa-record-vinyl"></i></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="saved-tab-just" data-toggle="tab" href="#saved-just" role="tab" aria-controls="saved-just"
+    <a class="nav-link" onclick="console.log('asdfasdfas');" id="saved-tab-just" data-toggle="tab" href="#saved-just" role="tab" aria-controls="saved-just"
       aria-selected="false"><i class="fas fa-2x fa-bookmark"></i></a>
   </li>
 </ul>
 <div class="tab-content card" id="myTabContentJust">
   <div class="tab-pane fade show active" id="user-posts-just" role="tabpanel" aria-labelledby="user-posts-tab-just">
-    <!------------------------------ POST 0 ---------------------->
-    <div id="post0_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
-      <div class="card-body text-dark" >
-         <img id ="post0_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
-          <p id = "post0_user" class = " font-weight-bold divider" style="margin-top:0.23cm;margin-left:2cm;margin-bottom:0.6cm" ><span  id="post0_user"></span></p><p></p>
-          <p id="post0_desc" class="text-md-left"><span id="post0_desc"></span></p>
-          <div class="card image-upload text-center border-0">
-              <label for='file-input'>
-                <img id='post0_pic' class="card-img-top " src="">
-              </label>
-          </div>
-          <iframe id="post0_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
-        <i id = "likebutton_0" onclick="likebutton(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
-        <i class="fa-2x far fa-comment"style="margin-left:3cm;"></i>
-        <i id = "savebutton_0" onclick="savebutton(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
-      </div>
-    </div>
-  <!------------------------------ POST 1 ---------------------->
-    <div id="post1_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
-      <div class="card-body text-dark" >
-         <img id ="post1_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
-          <p id = "post1_user" class = " font-weight-bold divider" style="margin-top:0.23cm;margin-left:2cm;margin-bottom:0.6cm" ><span  id="post1_user"></span></p><p></p>
-          <p id="post1_desc" class="text-md-left"><span id="post1_desc"></span></p>
-          <div class="card image-upload text-center border-0">
-              <label for='file-input'>
-                <img id='post1_pic' class="card-img-top " src="">
-              </label>
-          </div>
-          <iframe id="post1_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
-        <i id = "likebutton_1" onclick="likebutton(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
-        <i class="fa-2x far fa-comment"style="margin-left:3cm;"></i>
-        <i id = "savebutton_1" onclick="savebutton(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
-      </div>
-    </div>
 
-<!------------------------------ POST 2 ---------------------->
+
+
+<!------------------------------ POST 0 ---------------------->
+  <div id="post0_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
+    <div class="card-body text-dark" >
+       <img id ="post0_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
+        <p id = "post0_user" class = " font-weight-bold divider"><span id="post0_user"></span></p><p></p>
+        <p id="post0_desc" class="text-md-left"><span id="post0_desc"></span></p>
+        <div class="card image-upload text-center border-0">
+            <label for='file-input'>
+              <img id='post0_pic' class="card-img-top " src="">
+            </label>
+        </div>
+        <iframe id="post0_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
+      <i id = "likebutton_0" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "savebutton_0" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#post0_collapse" aria-expanded="false" aria-controls="post0_collapse"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="post0_collapse">
+         
+        <div id="card-container0"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="post0_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="post0_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "post0_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='post0_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('post0')"></i></button>
+
+      </div>
+
+      </div>
+
+    </div>
+  </div>
+
+<!------------------------------ POST1 ---------------------->
+  <div id="post1_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
+    <div class="card-body text-dark" >
+       <img id ="post1_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
+        <p id = "post1_user" class = " font-weight-bold divider"><span id="post1_user"></span></p><p></p>
+        <p id="post1_desc" class="text-md-left"><span id="post1_desc"></span></p>
+        <div class="card image-upload text-center border-0">
+            <label for='file-input'>
+              <img id='post1_pic' class="card-img-top " src="">
+            </label>
+        </div>
+        <iframe id="post1_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
+      <i id = "likebutton_1" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "savebutton_1" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="collapseExample">
+         
+        <div id="card-container1"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="post1_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="post1_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "post1_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='post1_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('post1')"></i></button>
+
+      </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+<!------------------------------ POST2 ---------------------->
   <div id="post2_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
     <div class="card-body text-dark" >
        <img id ="post2_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
-        <p id = "post2_user" class = " font-weight-bold divider" style="margin-top:0.23cm;margin-left:2cm;margin-bottom:0.6cm"><span id="post2_user"></span></p><p></p>
+        <p id = "post2_user" class = " font-weight-bold divider"><span id="post2_user"></span></p><p></p>
         <p id="post2_desc" class="text-md-left"><span id="post2_desc"></span></p>
         <div class="card image-upload text-center border-0">
             <label for='file-input'>
@@ -130,18 +183,47 @@
             </label>
         </div>
         <iframe id="post2_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
-      <i id = "likebutton_2" onclick="likebutton(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
-      <i class="fa-2x far fa-comment"style="margin-left:3cm;"></i>
-      <i id = "savebutton_2" onclick="savebutton(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+      <i id = "likebutton_2" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "savebutton_2" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="collapseExample">
+         
+        <div id="card-container2"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="post2_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="post2_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "post2_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='post2_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('post2')"></i></button>
+
+      </div>
+
+      </div>
+
     </div>
   </div>
 
 
- <!------------------------------ POST 3 ---------------------->
+
+
+
+
+
+
+
+<!------------------------------ POST3 ---------------------->
   <div id="post3_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
     <div class="card-body text-dark" >
        <img id ="post3_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
-        <p id = "post3_user" class = " font-weight-bold divider" style="margin-top:0.23cm;margin-left:2cm;margin-bottom:0.6cm"><span id="post3_user"></span></p><p></p>
+        <p id = "post3_user" class = " font-weight-bold divider"><span id="post3_user"></span></p><p></p>
         <p id="post3_desc" class="text-md-left"><span id="post3_desc"></span></p>
         <div class="card image-upload text-center border-0">
             <label for='file-input'>
@@ -149,18 +231,38 @@
             </label>
         </div>
         <iframe id="post3_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
-      <i id = "likebutton_3" onclick="likebutton(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
-      <i class="fa-2x far fa-comment"style="margin-left:3cm;"></i>
-      <i id = "savebutton_3" onclick="savebutton(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+      <i id = "likebutton_3" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "savebutton_3" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="collapseExample">
+         
+        <div id="card-container3"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="post3_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="post3_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "post3_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='post3_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('post3')"></i></button>
+
+      </div>
+
+      </div>
+
     </div>
   </div>
-
-
-  <!------------------------------ POST 4 ---------------------->
+<!------------------------------ POST4 ---------------------->
   <div id="post4_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
     <div class="card-body text-dark" >
        <img id ="post4_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
-        <p id = "post4_user" class = " font-weight-bold divider" style="margin-top:0.23cm;margin-left:2cm;margin-bottom:0.6cm"><span id="post4_user"></span></p><p></p>
+        <p id = "post4_user" class = " font-weight-bold divider"><span id="post4_user"></span></p><p></p>
         <p id="post4_desc" class="text-md-left"><span id="post4_desc"></span></p>
         <div class="card image-upload text-center border-0">
             <label for='file-input'>
@@ -168,17 +270,39 @@
             </label>
         </div>
         <iframe id="post4_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
-      <i id = "likebutton_4" onclick="likebutton(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
-      <i class="fa-2x far fa-comment"style="margin-left:3cm;"></i>
-      <i id = "savebutton_4" onclick="savebutton(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+      <i id = "likebutton_4" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "savebutton_4" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="collapseExample">
+         
+        <div id="card-container4"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="post4_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="post4_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "post4_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='post4_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('post4')"></i></button>
+
+      </div>
+
+      </div>
+
     </div>
   </div>
 
-  <!------------------------------ POST 5 ---------------------->
+<!------------------------------ POST5 ---------------------->
   <div id="post5_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
     <div class="card-body text-dark" >
        <img id ="post5_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
-        <p id = "post5_user" class = " font-weight-bold divider" style="margin-top:0.23cm;margin-left:2cm;margin-bottom:0.6cm"><span id="post5_user"></span></p><p></p>
+        <p id = "post5_user" class = " font-weight-bold divider"><span id="post5_user"></span></p><p></p>
         <p id="post5_desc" class="text-md-left"><span id="post5_desc"></span></p>
         <div class="card image-upload text-center border-0">
             <label for='file-input'>
@@ -186,18 +310,40 @@
             </label>
         </div>
         <iframe id="post5_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
-      <i id = "likebutton_5" onclick="likebutton(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
-      <i class="fa-2x far fa-comment"style="margin-left:3cm;"></i>
-      <i id = "savebutton_5" onclick="savebutton(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+      <i id = "likebutton_5" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "savebutton_5" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="collapseExample">
+         
+        <div id="card-container5"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="post5_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="post5_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "post5_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='post5_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('post5')"></i></button>
+
+      </div>
+
+      </div>
+
     </div>
   </div>
 
 
-  <!------------------------------ POST6 ---------------------->
+ <!------------------------------ POST6 ---------------------->
   <div id="post6_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
     <div class="card-body text-dark" >
        <img id ="post6_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
-        <p id = "post6_user" class = " font-weight-bold divider" style="margin-top:0.23cm;margin-left:2cm;margin-bottom:0.6cm"><span id="post6_user"></span></p><p></p>
+        <p id = "post6_user" class = " font-weight-bold divider"><span id="post6_user"></span></p><p></p>
         <p id="post6_desc" class="text-md-left"><span id="post6_desc"></span></p>
         <div class="card image-upload text-center border-0">
             <label for='file-input'>
@@ -205,9 +351,31 @@
             </label>
         </div>
         <iframe id="post6_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
-      <i id = "likebutton_6" onclick="likebutton(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
-      <i class="fa-2x far fa-comment"style="margin-left:3cm;"></i>
-      <i id = "savebutton_6" onclick="savebutton(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+      <i id = "likebutton_6" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "savebutton_6" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="collapseExample">
+         
+        <div id="card-container6"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="post6_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="post6_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "post6_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='post6_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('post6')"></i></button>
+
+      </div>
+
+      </div>
+
     </div>
   </div>
 
@@ -215,7 +383,7 @@
   <div id="post7_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
     <div class="card-body text-dark" >
        <img id ="post7_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
-        <p id = "post7_user" class = " font-weight-bold divider" style="margin-top:0.23cm;margin-left:2cm;margin-bottom:0.6cm"><span id="post7_user"></span></p><p></p>
+        <p id = "post7_user" class = " font-weight-bold divider"><span id="post7_user"></span></p><p></p>
         <p id="post7_desc" class="text-md-left"><span id="post7_desc"></span></p>
         <div class="card image-upload text-center border-0">
             <label for='file-input'>
@@ -223,17 +391,40 @@
             </label>
         </div>
         <iframe id="post7_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
-      <i id = "likebutton_7" onclick="likebutton(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
-      <i class="fa-2x far fa-comment"style="margin-left:3cm;"></i>
-      <i id = "savebutton_7" onclick="savebutton(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+      <i id = "likebutton_7" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "savebutton_7" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="collapseExample">
+         
+        <div id="card-container7"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="post7_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="post7_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "post7_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='post7_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('post7')"></i></button>
+
+      </div>
+
+      </div>
+
     </div>
   </div>
+
 
 <!------------------------------ POST8 ---------------------->
   <div id="post8_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
     <div class="card-body text-dark" >
        <img id ="post8_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
-        <p id = "post8_user" class = " font-weight-bold divider" style="margin-top:0.23cm;margin-left:2cm;margin-bottom:0.6cm"><span id="post8_user"></span></p><p></p>
+        <p id = "post8_user" class = " font-weight-bold divider"><span id="post8_user"></span></p><p></p>
         <p id="post8_desc" class="text-md-left"><span id="post8_desc"></span></p>
         <div class="card image-upload text-center border-0">
             <label for='file-input'>
@@ -241,9 +432,31 @@
             </label>
         </div>
         <iframe id="post8_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
-      <i id = "likebutton_8" onclick="likebutton(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
-      <i class="fa-2x far fa-comment"style="margin-left:3cm;"></i>
-      <i id = "savebutton_8" onclick="savebutton(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+      <i id = "likebutton_8" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "savebutton_8" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="collapseExample">
+         
+        <div id="card-container8"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="post8_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="post8_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "post8_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='post8_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('post8')"></i></button>
+
+      </div>
+
+      </div>
+
     </div>
   </div>
 
@@ -251,7 +464,7 @@
   <div id="post9_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
     <div class="card-body text-dark" >
        <img id ="post9_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
-        <p id = "post9_user" class = " font-weight-bold divider" style="margin-top:0.23cm;margin-left:2cm;margin-bottom:0.6cm"><span id="post9_user"></span></p><p></p>
+        <p id = "post9_user" class = " font-weight-bold divider"><span id="post9_user"></span></p><p></p>
         <p id="post9_desc" class="text-md-left"><span id="post9_desc"></span></p>
         <div class="card image-upload text-center border-0">
             <label for='file-input'>
@@ -259,9 +472,281 @@
             </label>
         </div>
         <iframe id="post9_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
-      <i id = "likebutton_9" onclick="likebutton(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
-      <i class="fa-2x far fa-comment"style="margin-left:3cm;"></i>
-      <i id = "savebutton_9" onclick="savebutton(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+      <i id = "likebutton_9" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "savebutton_9" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="collapseExample">
+         
+        <div id="card-container9"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="post9_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="post9_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "post9_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='post9_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('post9')"></i></button>
+
+      </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+  </div>
+  <div class="tab-pane fade" id="user-music-just" role="tabpanel" aria-labelledby="user-music-tab-just">
+    <!-- User Music Result 0 --> 
+    <div id="search0_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search0_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search0_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search0_artist"></span></p>
+       <i id = "search0_addmusic" onclick="savemusicbuttoncustomized(this)" class="fa-2x fas fa-record-vinyl pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+    <!-- User Music Result 1 --> 
+    <div id="search1_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search1_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search1_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search1_artist"></span></p>
+       <i id = "search1_addmusic" onclick="savemusicbuttoncustomized(this)" class="fa-2x fas fa-record-vinyl pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+    <!-- User Music Result 2 --> 
+    <div id="search2_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search2_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search2_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search2_artist"></span></p>
+       <i id = "search2_addmusic" onclick="savemusicbuttoncustomized(this)" class="fa-2x fas fa-record-vinyl pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+  <!-- User Music Result 3 --> 
+    <div id="search3_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search3_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search3_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search3_artist"></span></p>
+       <i id = "search3_addmusic" onclick="savemusicbuttoncustomized(this)" class="fa-2x fas fa-record-vinyl pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+  <!-- User Music Result 4 --> 
+    <div id="search4_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search4_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search4_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search4_artist"></span></p>
+       <i id = "search4_addmusic" onclick="savemusicbuttoncustomized(this)" class="fa-2x fas fa-record-vinyl pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+      <!-- User Music Result 5 --> 
+    <div id="search5_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search5_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search5_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search5_artist"></span></p>
+       <i id = "search5_addmusic" onclick="savemusicbuttoncustomized(this)" class="fa-2x fas fa-record-vinyl pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+      <!-- User Music Result 6 --> 
+    <div id="search6_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search6_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search6_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search6_artist"></span></p>
+       <i id = "search6_addmusic" onclick="savemusicbuttoncustomized(this)" class="fa-2x fas fa-record-vinyl pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+          <!-- User Music Result 7 --> 
+    <div id="search7_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search7_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search7_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search7_artist"></span></p>
+       <i id = "search7_addmusic" onclick="savemusicbuttoncustomized(this)" class="fa-2x fas fa-record-vinyl pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+          <!-- User Music Result 8 --> 
+    <div id="search8_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search8_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search8_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search8_artist"></span></p>
+       <i id = "search8_addmusic" onclick="savemusicbuttoncustomized(this)" class="fa-2x fas fa-record-vinyl pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+          <!-- User Music Result 9 --> 
+    <div id="search9_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search9_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search9_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search9_artist"></span></p>
+       <i id = "search9_addmusic" onclick="savemusicbuttoncustomized(this)" class="fa-2x fas fa-record-vinyl pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+
+<!-- ##################################### BOOKMARKS #########################################################--> 
+
+
+  <div class="tab-pane fade" id="saved-just" role="tabpanel" aria-labelledby="saved-tab-just">
+    
+
+
+<!------------------------------ POST 0 ---------------------->
+  <div id="book_post0_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
+    <div class="card-body text-dark" >
+       <img id ="book_post0_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
+        <p id = "book_post0_user" class = " font-weight-bold divider"><span id="book_post0_user"></span></p><p></p>
+        <p id="book_post0_desc" class="text-md-left"><span id="book_post0_desc"></span></p>
+        <div class="card image-upload text-center border-0">
+            <label for='file-input'>
+              <img id='book_post0_pic' class="card-img-top " src="">
+            </label>
+        </div>
+        <iframe id="book_post0_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
+      <i id = "book_likebutton_0" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "book_savebutton_0" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#book_post0_collapse" aria-expanded="false" aria-controls="book_post0_collapse"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="book_post0_collapse">
+         
+        <div id="card-container0"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="book_post0_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="book_post0_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "book_post0_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='book_post0_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('book_post0')"></i></button>
+
+      </div>
+
+      </div>
+
+    </div>
+  </div>
+
+<!------------------------------ book_POST1 ---------------------->
+  <div id="book_post1_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
+    <div class="card-body text-dark" >
+       <img id ="book_post1_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
+        <p id = "book_post1_user" class = " font-weight-bold divider"><span id="book_post1_user"></span></p><p></p>
+        <p id="book_post1_desc" class="text-md-left"><span id="book_post1_desc"></span></p>
+        <div class="card image-upload text-center border-0">
+            <label for='file-input'>
+              <img id='book_post1_pic' class="card-img-top " src="">
+            </label>
+        </div>
+        <iframe id="book_post1_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
+      <i id = "book_likebutton_1" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "book_savebutton_1" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="collapseExample">
+         
+        <div id="book_card-container1"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="book_post1_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="book_post1_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "book_post1_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='book_post1_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('book_post1')"></i></button>
+
+      </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+<!------------------------------ book_POST2 ---------------------->
+  <div id="book_post2_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
+    <div class="card-body text-dark" >
+       <img id ="book_post2_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
+        <p id = "book_post2_user" class = " font-weight-bold divider"><span id="book_post2_user"></span></p><p></p>
+        <p id="book_post2_desc" class="text-md-left"><span id="book_post2_desc"></span></p>
+        <div class="card image-upload text-center border-0">
+            <label for='file-input'>
+              <img id='book_post2_pic' class="card-img-top " src="">
+            </label>
+        </div>
+        <iframe id="book_post2_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
+      <i id = "book_likebutton_2" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "book_savebutton_2" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="collapseExample">
+         
+        <div id="book_card-container2"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="book_post2_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="book_post2_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "book_post2_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='book_post2_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('book_post2')"></i></button>
+
+      </div>
+
+      </div>
+
     </div>
   </div>
 
@@ -270,23 +755,304 @@
 
 
 
+
+
+
+<!------------------------------ book_POST3 ---------------------->
+  <div id="book_post3_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
+    <div class="card-body text-dark" >
+       <img id ="book_post3_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
+        <p id = "book_post3_user" class = " font-weight-bold divider"><span id="book_post3_user"></span></p><p></p>
+        <p id="book_post3_desc" class="text-md-left"><span id="book_post3_desc"></span></p>
+        <div class="card image-upload text-center border-0">
+            <label for='file-input'>
+              <img id='book_post3_pic' class="card-img-top " src="">
+            </label>
+        </div>
+        <iframe id="book_post3_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
+      <i id = "book_likebutton_3" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "book_savebutton_3" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="collapseExample">
+         
+        <div id="book_card-container3"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="book_post3_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="book_post3_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "book_post3_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='book_post3_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('book_post3')"></i></button>
+
+      </div>
+
+      </div>
+
+    </div>
   </div>
-  <div class="tab-pane fade" id="user-music-just" role="tabpanel" aria-labelledby="user-music-tab-just">
-    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1
-      labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft
-      beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad
-      vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
-      helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes
-      anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party
-      scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+<!------------------------------ book_POST4 ---------------------->
+  <div id="book_post4_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
+    <div class="card-body text-dark" >
+       <img id ="book_post4_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
+        <p id = "book_post4_user" class = " font-weight-bold divider"><span id="book_post4_user"></span></p><p></p>
+        <p id="book_post4_desc" class="text-md-left"><span id="book_post4_desc"></span></p>
+        <div class="card image-upload text-center border-0">
+            <label for='file-input'>
+              <img id='book_post4_pic' class="card-img-top " src="">
+            </label>
+        </div>
+        <iframe id="book_post4_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
+      <i id = "book_likebutton_4" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "book_savebutton_4" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="collapseExample">
+         
+        <div id="book_card-container4"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="book_post4_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="book_post4_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "book_post4_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='book_post4_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('book_post4')"></i></button>
+
+      </div>
+
+      </div>
+
+    </div>
   </div>
-  <div class="tab-pane fade" id="saved-just" role="tabpanel" aria-labelledby="saved-tab-just">
-    <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro
-      fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone
-      skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings
-      gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork
-      biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl
-      craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+
+<!------------------------------ book_POST5 ---------------------->
+  <div id="book_post5_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
+    <div class="card-body text-dark" >
+       <img id ="book_post5_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
+        <p id = "book_post5_user" class = " font-weight-bold divider"><span id="book_post5_user"></span></p><p></p>
+        <p id="book_post5_desc" class="text-md-left"><span id="book_post5_desc"></span></p>
+        <div class="card image-upload text-center border-0">
+            <label for='file-input'>
+              <img id='book_post5_pic' class="card-img-top " src="">
+            </label>
+        </div>
+        <iframe id="book_post5_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
+      <i id = "book_likebutton_5" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "book_savebutton_5" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="collapseExample">
+         
+        <div id="book_card-container5"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="book_post5_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="book_post5_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "book_post5_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='book_post5_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('book_post5')"></i></button>
+
+      </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+ <!------------------------------ book_POST6 ---------------------->
+  <div id="book_post6_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
+    <div class="card-body text-dark" >
+       <img id ="book_post6_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
+        <p id = "book_post6_user" class = " font-weight-bold divider"><span id="book_post6_user"></span></p><p></p>
+        <p id="book_post6_desc" class="text-md-left"><span id="book_post6_desc"></span></p>
+        <div class="card image-upload text-center border-0">
+            <label for='file-input'>
+              <img id='book_post6_pic' class="card-img-top " src="">
+            </label>
+        </div>
+        <iframe id="book_post6_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
+      <i id = "book_likebutton_6" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "book_savebutton_6" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="collapseExample">
+         
+        <div id="book_card-container6"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="book_post6_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="book_post6_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "book_post6_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='book_post6_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('book_post6')"></i></button>
+
+      </div>
+
+      </div>
+
+    </div>
+  </div>
+
+<!------------------------------ book_POST7 ---------------------->
+  <div id="book_post7_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
+    <div class="card-body text-dark" >
+       <img id ="book_post7_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
+        <p id = "book_post7_user" class = " font-weight-bold divider"><span id="book_post7_user"></span></p><p></p>
+        <p id="book_post7_desc" class="text-md-left"><span id="book_post7_desc"></span></p>
+        <div class="card image-upload text-center border-0">
+            <label for='file-input'>
+              <img id='book_post7_pic' class="card-img-top " src="">
+            </label>
+        </div>
+        <iframe id="book_post7_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
+      <i id = "likebutton_7" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "savebutton_7" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="collapseExample">
+         
+        <div id="book_card-container7"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="book_post7_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="book_post7_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "book_post7_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='book_post7_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('book_post7')"></i></button>
+
+      </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+<!------------------------------ book_POST8 ---------------------->
+  <div id="book_post8_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
+    <div class="card-body text-dark" >
+       <img id ="book_post8_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
+        <p id = "book_post8_user" class = " font-weight-bold divider"><span id="book_post8_user"></span></p><p></p>
+        <p id="book_post8_desc" class="text-md-left"><span id="book_post8_desc"></span></p>
+        <div class="card image-upload text-center border-0">
+            <label for='file-input'>
+              <img id='book_post8_pic' class="card-img-top " src="">
+            </label>
+        </div>
+        <iframe id="book_post8_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
+      <i id = "book_likebutton_8" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "book_savebutton_8" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="collapseExample">
+         
+        <div id="book_card-container8"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="book_post8_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="book_post8_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "book_post8_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='book_post8_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('book_post8')"></i></button>
+
+      </div>
+
+      </div>
+
+    </div>
+  </div>
+
+<!------------------------------ book_POST1 ---------------------->
+  <div id="book_post9_id" name="timestamp" class="invisible card mx-auto" style="width: 30rem;" >
+    <div class="card-body text-dark" >
+       <img id ="book_post9_profpic" class="rounded-circle pull-left"  style="width: 3rem;" src="" data-holder-rendered="true">
+        <p id = "book_post9_user" class = " font-weight-bold divider"><span id="book_post9_user"></span></p><p></p>
+        <p id="book_post9_desc" class="text-md-left"><span id="book_post9_desc"></span></p>
+        <div class="card image-upload text-center border-0">
+            <label for='file-input'>
+              <img id='book_post9_pic' class="card-img-top " src="">
+            </label>
+        </div>
+        <iframe id="book_post9_music_url" src="" width="440" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe><p></p>
+      <i id = "book_likebutton_9" onclick="likebuttoncustomized(this)" class="fa fa-2x fa-heart-o"style="margin-left:1.5cm;"></i>
+      <i id = "book_savebutton_9" onclick="savebuttoncustomized(this)"  class="fa-2x far fa-bookmark"style="margin-left:3cm;"></i>
+
+      <button style="margin-left:2cm;" class="cbtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa-2x far fa-comment"></i></button>
+      <div class="collapse" id="collapseExample">
+         
+        <div id="book_card-container9"></div>
+
+        <div class = "card mx-auto">
+        <div class="card-body">
+          <img  id ="book_post9_new_com_img" class = "pull-left rounded-circle" src="" style = "width: 3rem">
+          <span id ="book_post9_new_com_userid" class ="font-weight-bold divider" style="margin-left:0.5cm; margin-top:0.2cm;"></span>
+          <span id= "book_post9_new_comment" class ="card-comment text-muted" style="margin-left:0.5cm;"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+
+        <input type="text" id='book_post9_comment' class="form-control" placeholder="Password" required autofocus>
+        <button class="btn btn-outline-secondary"><i class="fas fa-plus" onclick="newcomment('book_post9')"></i></button>
+
+      </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </div>
 </div>
 

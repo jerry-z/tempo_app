@@ -130,7 +130,7 @@ function update_search_music(data,j){
     let album = 'search' + j + '_album' 
     document.getElementById(album).src = api_album;
 
-    let add_song = 'search' + j + '_adduser' 
+    let add_song = 'search' + j + '_addmusic' 
     document.getElementById(add_song).src = api_add_song; //
     let favorited = data['favorited']
 

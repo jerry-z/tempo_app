@@ -1,4 +1,4 @@
-var desktop_path = '/home/davit/Desktop/'
+var desktop_path = '/home/jerry/Desktop/'
 
 
 let urlinfo = window.location.search;
@@ -100,9 +100,83 @@ function logout(){
     location.href = "../login/login.html";
 }
 
+function updateComments(commentlist,j){
+
+    var comlist = [];
+
+    var i;
+    for (i = 0; i < commentlist.length; i++) {
+        let userid = commentlist[i]['UserId'];
+        let comment = commentlist[i]['comment'];
+        let com = {'userId':userid,'comment':comment }
+        comlist.push(com)
+    }  
+    console.log('123213',comlist)
+
+    return comlist
+}
+
+
+
+
+
+
+
+
+function initListOfTasks(tasks,i,bookmark=false) {
+    let cardContainer;
+    let createTaskCard = (task) => {
+        let card = document.createElement('div');
+        card.className = 'card cursor-pointer';
+
+        let cardBody = document.createElement('div');
+        cardBody.className = 'card-body';
+
+        let userId = document.createElement('span');
+        userId.innerText = task.userId;
+        userId.className = 'font-weight-bold divider';
+        userId.style = 'margin-left:0.5cm; margin-top:0.2cm;';
+
+
+        let comment = document.createElement('span');
+        comment.innerText = task.comment;
+        comment.className = 'card-comment text-muted ';
+        comment.style = 'margin-left:0.5cm;'
+
+        let profimg = document.createElement('img');
+        profimg.className = 'rounded-circle pull-left';
+        profimg.style = 'width: 3rem';
+
+        console.log(task.userId,'1AAAAAA2321')
+        profimg.src = 'https://s3.amazonaws.com/music-user-image/' +task.userId+ '.jpg'
+
+        cardBody.appendChild(profimg);
+        cardBody.appendChild(userId);
+        cardBody.appendChild(comment);
+
+        card.appendChild(cardBody);
+        cardContainer.appendChild(card);
+    }
+    if (cardContainer) {
+        document.getElementById('card-container').replaceWith(cardContainer);
+        return;
+    }
+
+    if (bookmark == true){
+        cardContainer = document.getElementById('book_'+ 'card-container'+i); 
+
+    }else{
+        cardContainer = document.getElementById('card-container'+i); 
+
+    }
+    var f;
+    for(f=0; f < tasks.length; f++){
+        createTaskCard(tasks[f]);
+    };
+};
 
 function updatePost(data, i){
-
+    var tasks;
     let j = i;
     var api_postid = data['StoryId'];
     var api_userid = data['UserId'];
@@ -111,6 +185,13 @@ function updatePost(data, i){
     var api_post_pic = data['imagedata'];
     console.log('asdfas', api_post_pic)
     var api_post_music_url = data['musicdata']['url'];
+    var api_post_comments = data['comments_list'];
+    
+    tasks = updateComments(api_post_comments,i)
+    console.log(tasks.length, 'SFDSDFDS')
+    if (tasks.length>0){
+        initListOfTasks(tasks,i)
+    }
 
     let postid = 'post' + j + '_id';
     visible = document.getElementById(postid)
