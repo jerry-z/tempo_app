@@ -1,4 +1,4 @@
-var desktop_path = '/home/jerry/Desktop/'
+var desktop_path = '/home/davit/Desktop/'
 
 
 let urlinfo = window.location.search;
@@ -102,6 +102,7 @@ function logout(){
 
 
 function updatePost(data, i){
+
     let j = i;
     var api_postid = data['StoryId'];
     var api_userid = data['UserId'];
@@ -130,13 +131,24 @@ function updatePost(data, i){
     let post_music = 'post' + j + '_music_url' 
     document.getElementById(post_music).src = api_post_music_url;
 
-     /**
-    var post1_bookmark = false //save button  ,get + post 
-    document.getElementById('post1_bookmark').innerHTML = post1_bookmark;
+    let like_list = data["like_list"]
+    let collection_list = data["collection_list"]
+    console.log(j)
+    console.log(like_list)
+    console.log(collection_list)
+    if (like_list.indexOf(user_val) >= 0){
+        console.log("!!!!!!!!!!!!!")
+        let x = document.getElementById("likebuttom_" + j)
+        x.classList.remove( "fa-heart-o" );
+        x.classList.add( "fa-heart" );
 
-    var post1_likes = '' //like button, get + post
-    document.getElementById('post1_likes').innerHTML = post1_likes; 
-    **/
+    }
+    if (collection_list.indexOf(user_val) >= 0){
+        let x = document.getElementById("savebutton_" + j)
+        x.classList.remove( "far" );
+        x.classList.add( "fas" );
+
+    }
 }
 
 
@@ -171,9 +183,11 @@ function getPostInfo(){
     apigClient.getNewsfeedPost({},body, {}).then((res)=>{
                 console.log(res);
                 data = res['data']['body'];
+                console.log(data.length)
                 var i;
                 for (i = 0; i < data.length; i++) {
                     updatePost(data[i],i);
+                    homePostInfoList[i] = data[i]
                 }
 
             })
@@ -195,3 +209,4 @@ function toDataURL(url, callback) {
   xhr.responseType = 'blob';
   xhr.send();
 }
+var homePostInfoList = [];
