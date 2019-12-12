@@ -1,8 +1,11 @@
 var desktop_path = '/home/jerry/Desktop/'
-var user_val = 'davit666lwh';
+
+
+let urlinfo = window.location.search;
+let searchparams = new URLSearchParams(urlinfo)
+var user_val = searchparams.get("user_key")
+//var user_val = 'davit666lwh';
 var user_key = '?user_key=' + user_val;
-
-
 
 
 
