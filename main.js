@@ -1,4 +1,4 @@
-var desktop_path = '/home/jerry/Desktop/'
+var desktop_path = '/home/davit/Desktop/'
 
 
 let urlinfo = window.location.search;
@@ -102,11 +102,8 @@ function logout(){
 
 
 function updatePost(data, i){
-<<<<<<< HEAD
-    let j = i ;
-=======
+
     let j = i;
->>>>>>> 542ea71c5e45a23310f67fd1df79fbb74bad4d5d
     var api_postid = data['StoryId'];
     var api_userid = data['UserId'];
     var api_post_desc = data['txtdata'];
@@ -186,6 +183,7 @@ function getPostInfo(){
     apigClient.getNewsfeedPost({},body, {}).then((res)=>{
                 console.log(res);
                 data = res['data']['body'];
+                console.log(data.length)
                 var i;
                 for (i = 0; i < data.length; i++) {
                     updatePost(data[i],i);
