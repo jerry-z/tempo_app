@@ -144,6 +144,20 @@ function helper(n){
 
 
 
+function ai_music_search(){
+    let aibody = {
+      "key1": "value1",
+      "key2": "value2",
+      "key3": "value3"
+    }
+    apigClient.rekognitionSearchPost({},aibody, {}).then(function(result){
+              console.log('success')
+            }).catch( function(result){
+                console.log('fail')
+            });
+}
+
+
 function uploadStory() {
     let urlinfo = window.location.search;
     let searchparams = new URLSearchParams(urlinfo)
@@ -183,3 +197,4 @@ function uploadStory() {
 
 
     }
+
