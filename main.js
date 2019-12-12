@@ -92,7 +92,7 @@ function followuserbutton(x) {
 }
 
 function editprofile(){
-    location.href = "editprofile.html";  
+    location.href = "editprofile.html" + user_key;  
 }
 
 
@@ -185,7 +185,7 @@ function getPostInfo(){
                 data = res['data']['body'];
                 console.log(data.length)
                 var i;
-                for (i = 0; i < data.length; i++) {
+                for (i = 0; i < data.length && i < 10; i++) {
                     updatePost(data[i],i);
                     homePostInfoList[i] = data[i]
                 }
