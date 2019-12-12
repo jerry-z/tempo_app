@@ -102,7 +102,11 @@ function logout(){
 
 
 function updatePost(data, i){
+<<<<<<< HEAD
+    let j = i ;
+=======
     let j = i;
+>>>>>>> 542ea71c5e45a23310f67fd1df79fbb74bad4d5d
     var api_postid = data['StoryId'];
     var api_userid = data['UserId'];
     var api_post_desc = data['txtdata'];
@@ -130,13 +134,24 @@ function updatePost(data, i){
     let post_music = 'post' + j + '_music_url' 
     document.getElementById(post_music).src = api_post_music_url;
 
-     /**
-    var post1_bookmark = false //save button  ,get + post 
-    document.getElementById('post1_bookmark').innerHTML = post1_bookmark;
+    let like_list = data["like_list"]
+    let collection_list = data["collection_list"]
+    console.log(j)
+    console.log(like_list)
+    console.log(collection_list)
+    if (like_list.indexOf(user_val) >= 0){
+        console.log("!!!!!!!!!!!!!")
+        let x = document.getElementById("likebuttom_" + j)
+        x.classList.remove( "fa-heart-o" );
+        x.classList.add( "fa-heart" );
 
-    var post1_likes = '' //like button, get + post
-    document.getElementById('post1_likes').innerHTML = post1_likes; 
-    **/
+    }
+    if (collection_list.indexOf(user_val) >= 0){
+        let x = document.getElementById("savebutton_" + j)
+        x.classList.remove( "far" );
+        x.classList.add( "fas" );
+
+    }
 }
 
 
@@ -174,6 +189,7 @@ function getPostInfo(){
                 var i;
                 for (i = 0; i < data.length; i++) {
                     updatePost(data[i],i);
+                    homePostInfoList[i] = data[i]
                 }
 
             })
@@ -195,3 +211,4 @@ function toDataURL(url, callback) {
   xhr.responseType = 'blob';
   xhr.send();
 }
+var homePostInfoList = [];
