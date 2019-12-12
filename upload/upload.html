@@ -8,11 +8,28 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.css">
+  
+  <!-- API GATEWAY-->
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/axios/dist/axios.standalone.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/CryptoJS/rollups/hmac-sha256.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/CryptoJS/rollups/sha256.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/CryptoJS/components/hmac.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/CryptoJS/components/enc-base64.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/url-template/url-template.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/apiGatewayCore/sigV4Client.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/apiGatewayCore/apiGatewayClient.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/apiGatewayCore/simpleHttpClient.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/apiGatewayCore/utils.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/apigClient.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
   <title>Tempo | Upload</title>
 
 </head>
 
-<body>
+    
+<body onload="updateupload();localStorage.setItem('flag', false);console.log(document.getElementById('file-input').files[0]);">
   <div class="header" id="myHeader">
     <img class="mb-4" src="../imgs/logo.jpg" alt="" width="150" class="center" >
   </div>
@@ -29,16 +46,18 @@
           <div class="card image-upload">
               <label for='file-input'>
                 <img id='addPic' class="card-img-top" src="../imgs/img_upload.JPG">
+                <data id = 'inputflag' value='none'></data>
               </label>
-              <input id="file-input" onchange="document.getElementById('addPic').src = window.URL.createObjectURL(this.files[0]); uploadPhoto();" type="file" name="avatar" accept="image/jpg, image/png">
+              <input id="file-input" onchange="document.getElementById('addPic').src = window.URL.createObjectURL(this.files[0]); uploadImage(document.getElementById('file-input').files[0].name); document.getElementById('inputflag').value = document.getElementById('file-input').files[0].name;" type="file" name="avatar" accept="image/jpg">
           </div>
       </div>
   </div>
 
-
   <center>
+  <iframe id="story_music_url" src="" width="440" height="10" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
   <div>
-    <button style="width: 14rem;" class="btn3 mx-auto"><i class="fab fa-spotify fa-2x"></i></button>
+    <button onclick=" gotouploadsearch()" style="width: 14rem;" class="btn3 mx-auto"><i class="fab fa-spotify fa-2x"></i></button>
     <button style="width: 14rem;"class="btn3 mx-auto"><i class="fa fa-cloud fa-2x"></i></button>
 
   </div>  
@@ -52,7 +71,7 @@
 
   </div>
 
-  <button class="btn btn-lg btn-dark btn-block  mx-auto" style="width: 28rem;" type="submit">POST</button>
+  <button class="btn btn-lg btn-dark btn-block  mx-auto" style="width: 28rem;margin-bottom: 4cm" type="submit">POST</button>
 
 
   <div class="footer">

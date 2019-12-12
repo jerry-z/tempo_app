@@ -2,7 +2,20 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="home.css" rel="stylesheet"  type="text/css">
+  <!-- API GATEWAY-->
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/axios/dist/axios.standalone.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/CryptoJS/rollups/hmac-sha256.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/CryptoJS/rollups/sha256.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/CryptoJS/components/hmac.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/CryptoJS/components/enc-base64.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/url-template/url-template.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/apiGatewayCore/sigV4Client.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/apiGatewayCore/apiGatewayClient.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/apiGatewayCore/simpleHttpClient.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/apiGatewayCore/utils.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/apigClient.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
   <link href="../main.css" rel="stylesheet"  type="text/css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
@@ -27,17 +40,23 @@
     <img class="mb-4" src="../imgs/logo.jpg" alt="" width="150" class="center" >
   </div>
   <script type="text/javascript" src="../main.js"></script>
-  <center>
+  <script type="text/javascript" src="search.js"></script>
 
-      <div class="input-group">
-        <input id='searchValue' type="text"
-               class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary"><i class="fa fa-search" onclick="goto_search()"></i></button>
-        </div>
-      </div>
+
+  <div class="input-group">
+    <input id='searchValue' type="text"
+           class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary"><i class="fa fa-search" onclick="search()"></i></button>
+    </div>
+  </div>
       
 <!-- TABS      -->
+<style>
+  .card, .card-body{
+     padding:0;
+ }
+</style>
 
 <ul class="nav nav-tabs nav-justified md-tabs indigo" id="myTabJust" role="tablist">
   <li class="nav-item">
@@ -50,28 +69,236 @@
       aria-selected="false"><i class="fas fa-2x fa-music"></i></a>
   </li>
 </ul>
-<div class="tab-content card" id="myTabContentJust">
+
+
+<div class="tab-content card  pt-5" id="myTabContentJust">
+
+
   <div class="tab-pane fade show active" id="user-accounts-just" role="tabpanel" aria-labelledby="user-accounts-tab-just">
-    
-    <img id ="account_pic" class="rounded-circle pull-left"  style="width: 3rem;margin-left:0.25cm;margin-top:0.15cm;" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg">
-    <p class="pull-left" style="margin-top:0.45cm;margin-left:1cm;">kanye.west</p>
-    <i onclick="followuserbutton(this)"class="fas fa-user-plus pull-right" style="margin-top:0.5cm;margin-right:0.5cm;" ></i>
+
+    <!--- User Search Result 0 -->
+    <div id="search0_account_id" class="card invisible">
+      <div class="card-body">
+        <img id ="search0_profpic" class="rounded-circle pull-left"  style="width: 4rem;height: 4rem;margin:0.2cm;margin-right:1cm" src="">
+        <div class="font-weight-bold" style="margin-top:0.6cm; "><span id="search0_username"></span>
+          <span class="d-inline-block btn float-right"><i id="search0_adduser"  onclick="followuserbutton(this)"class="pull-right fas fa-user-plus " style="margin-right:1cm;" ></i></span>
+        </div>
+      </div>
+    </div>
+
+    <!--- User Search Result 1 -->
+    <div id="search1_account_id" class="card invisible">
+      <div class="card-body">
+        <img id ="search1_profpic" class="rounded-circle pull-left"  style="width: 4rem;height: 4rem;margin:0.2cm;margin-right:1cm" src="">
+        <div class="font-weight-bold" style="margin-top:0.6cm; "><span id="search1_username"></span>
+          <span class="d-inline-block btn float-right"><i id="search1_adduser"  onclick="followuserbutton(this)"class="pull-right fas fa-user-plus " style="margin-right:1cm;" ></i></span>
+        </div>
+      </div>
+    </div>
+
+    <!--- User Search Result 2 -->
+    <div id="search2_account_id" class="card invisible">
+      <div class="card-body">
+        <img id ="search2_profpic" class="rounded-circle pull-left"  style="width: 4rem;height: 4rem;margin:0.2cm;margin-right:1cm" src="">
+        <div class="font-weight-bold" style="margin-top:0.6cm; "><span id="search2_username"></span>
+          <span class="d-inline-block btn float-right"><i id="search2_adduser"  onclick="followuserbutton(this)"class="pull-right fas fa-user-plus " style="margin-right:1cm;" ></i></span>
+        </div>
+      </div>
+    </div>
+
+<!--- User Search Result 3 -->
+    <div id="search3_account_id" class="card invisible">
+      <div class="card-body">
+        <img id ="search3_profpic" class="rounded-circle pull-left"  style="width: 4rem;height: 4rem;margin:0.2cm;margin-right:1cm" src="">
+        <div class="font-weight-bold" style="margin-top:0.6cm; "><span id="search3_username"></span>
+          <span class="d-inline-block btn float-right"><i id="search3_adduser"  onclick="followuserbutton(this)"class="pull-right fas fa-user-plus " style="margin-right:1cm;" ></i></span>
+        </div>
+      </div>
+    </div>
+
+
+<!--- User Search Result 4 -->
+    <div id="search4_account_id" class="card invisible">
+      <div class="card-body">
+        <img id ="search4_profpic" class="rounded-circle pull-left"  style="width: 4rem;height: 4rem;margin:0.2cm;margin-right:1cm" src="">
+        <div class="font-weight-bold" style="margin-top:0.6cm; "><span id="search4_username"></span>
+          <span class="d-inline-block btn float-right"><i id="search4_adduser"  onclick="followuserbutton(this)"class="pull-right fas fa-user-plus " style="margin-right:1cm;" ></i></span>
+        </div>
+      </div>
+    </div>
+
+
+<!--- User Search Result 5 -->
+    <div id="search5_account_id" class="card invisible">
+      <div class="card-body">
+        <img id ="search5_profpic" class="rounded-circle pull-left"  style="width: 4rem;height: 4rem;margin:0.2cm;margin-right:1cm" src="">
+        <div class="font-weight-bold" style="margin-top:0.6cm; "><span id="search5_username"></span>
+          <span class="d-inline-block btn float-right"><i id="search5_adduser"  onclick="followuserbutton(this)"class="pull-right fas fa-user-plus " style="margin-right:1cm;" ></i></span>
+        </div>
+      </div>
+    </div>
+<!--- User Search Result 6 -->
+    <div id="search6_account_id" class="card invisible">
+      <div class="card-body">
+        <img id ="search6_profpic" class="rounded-circle pull-left"  style="width: 4rem;height: 4rem;margin:0.2cm;margin-right:1cm" src="">
+        <div class="font-weight-bold" style="margin-top:0.6cm; "><span id="search6_username"></span>
+          <span class="d-inline-block btn float-right"><i id="search6_adduser"  onclick="followuserbutton(this)"class="pull-right fas fa-user-plus " style="margin-right:1cm;" ></i></span>
+        </div>
+      </div>
+    </div>
+
+<!--- User Search Result 7 -->
+    <div id="search7_account_id" class="card invisible">
+      <div class="card-body">
+        <img id ="search7_profpic" class="rounded-circle pull-left"  style="width: 4rem;height: 4rem;margin:0.2cm;margin-right:1cm" src="">
+        <div class="font-weight-bold" style="margin-top:0.6cm; "><span id="search7_username"></span>
+          <span class="d-inline-block btn float-right"><i id="search7_adduser"  onclick="followuserbutton(this)"class="pull-right fas fa-user-plus " style="margin-right:1cm;" ></i></span>
+        </div>
+      </div>
+    </div>
+
+<!--- User Search Result 8 -->
+    <div id="search8_account_id" class="card invisible">
+      <div class="card-body">
+        <img id ="search8_profpic" class="rounded-circle pull-left"  style="width: 4rem;height: 4rem;margin:0.2cm;margin-right:1cm" src="">
+        <div class="font-weight-bold" style="margin-top:0.6cm; "><span id="search8_username"></span>
+          <span class="d-inline-block btn float-right"><i id="search8_adduser"  onclick="followuserbutton(this)"class="pull-right fas fa-user-plus " style="margin-right:1cm;" ></i></span>
+        </div>
+      </div>
+    </div>
+
+<!--- User Search Result 9 -->
+    <div id="search9_account_id" class="card invisible">
+      <div class="card-body">
+        <img id ="search9_profpic" class="rounded-circle pull-left"  style="width: 4rem;height: 4rem;margin:0.2cm;margin-right:1cm" src="">
+        <div class="font-weight-bold" style="margin-top:0.6cm; "><span id="search9_username"></span>
+          <span class="d-inline-block btn float-right"><i id="search9_adduser"  onclick="followuserbutton(this)"class="pull-right fas fa-user-plus " style="margin-right:1cm;" ></i></span>
+        </div>
+      </div>
+    </div>
 
   </div>
- 
-  <div class="tab-pane fade" id="music-just" role="tabpanel" aria-labelledby="music-tab-just">
-    <div id="post1" class="card card-img-top"></div> 
-         <img id ="album_pic" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
-         <p class="pull-left" style="margin-top:0.7cm;margin-left:1cm;">All of the Lights</p>
-         <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
-         <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">Kanye West</p>
-         <i onclick="savemusicbutton(this)" class="fa-2x far fa-circle pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
-    </div>  
 
+
+    <div class="tab-pane fade" id="music-just" role="tabpanel" aria-labelledby="music-tab-just">
+    <!------------------------------------- MUSIC ------------------------------------------------------------------> 
+
+    <!-- User Music Result 0 --> 
+    <div id="search0_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search0_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search0_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search0_artist"></span></p>
+       <i onclick="savemusicbutton(this)" class="fa-2x far fa-circle pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+    <!-- User Music Result 1 --> 
+    <div id="search1_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search1_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search1_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search1_artist"></span></p>
+       <i onclick="savemusicbutton(this)" class="fa-2x far fa-circle pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+    <!-- User Music Result 2 --> 
+    <div id="search2_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search2_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search2_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search2_artist"></span></p>
+       <i onclick="savemusicbutton(this)" class="fa-2x far fa-circle pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+  <!-- User Music Result 3 --> 
+    <div id="search3_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search3_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search3_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search3_artist"></span></p>
+       <i onclick="savemusicbutton(this)" class="fa-2x far fa-circle pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+  <!-- User Music Result 4 --> 
+    <div id="search4_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search4_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search4_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search4_artist"></span></p>
+       <i onclick="savemusicbutton(this)" class="fa-2x far fa-circle pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+      <!-- User Music Result 5 --> 
+    <div id="search5_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search5_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search5_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search5_artist"></span></p>
+       <i onclick="savemusicbutton(this)" class="fa-2x far fa-circle pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+      <!-- User Music Result 6 --> 
+    <div id="search6_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search6_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search6_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search6_artist"></span></p>
+       <i onclick="savemusicbutton(this)" class="fa-2x far fa-circle pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+          <!-- User Music Result 7 --> 
+    <div id="search7_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search7_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search7_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search7_artist"></span></p>
+       <i onclick="savemusicbutton(this)" class="fa-2x far fa-circle pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+          <!-- User Music Result 8 --> 
+    <div id="search8_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search8_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search8_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search8_artist"></span></p>
+       <i onclick="savemusicbutton(this)" class="fa-2x far fa-circle pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+          <!-- User Music Result 9 --> 
+    <div id="search9_music_id" class="card invisible">
+      <div class="card-body">
+       <img id ="search9_album" class="pull-left mx-auto text-center"  style="width: 5rem;margin-top:none;margin: 0 auto;" src="https://i.scdn.co/image/c0df37da32cbe3212fbc95fd6863e2e9047b086f">
+       <p class="pull-left font-weight-bold" style="margin-top:0.7cm;margin-left:1cm;"><span id="search9_song"></span></p>
+       <p class="pull-left" style="margin-top:0.7cm;margin-left:0.5cm;">-</p>
+       <p class="pull-left font-weight-bold text-muted" style="margin-top:0.7cm;margin-left:0.5cm;"><span id="search9_artist"></span></p>
+       <i onclick="savemusicbutton(this)" class="fa-2x far fa-circle pull-right" style="margin-top:0.7cm;margin-right:0.5cm;" ></i>
+      </div>
+    </div>
+
+
+
+  </div>  
   </div>
 
 
-  </center> 
 
   <div class="footer">
     <button class="btn1"><i class="fa fa-home fa-2x" onclick="goto_home()"></i></button>

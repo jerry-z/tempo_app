@@ -1,3 +1,12 @@
+var desktop_path = '/home/jerry/Desktop/'
+var user_val = 'davit666lwh';
+var user_key = '?user_key=' + user_val;
+
+
+
+
+
+
 window.onscroll = function() {myFunction()};
 
 var header = document.getElementById("myHeader");
@@ -12,10 +21,10 @@ function myFunction() {
 }
 
 
-function goto_home(){location.href = "../home/home.html";}
-function goto_search(){location.href = "../search/search.html";}
-function goto_upload(){location.href = "../upload/upload.html";}
-function goto_user(){location.href = "../user/user.html";}
+function goto_home(){location.href = "../home/home.html"+ user_key;}
+function goto_search(){location.href = "../search/search.html"+ user_key;}
+function goto_upload(){location.href = "../upload/upload.html"+ user_key + "&music_url=none&image_url=none";}
+function goto_user(){location.href = "../user/user.html"+ user_key;}
 
 
 function likebutton(x) {
@@ -94,7 +103,7 @@ function updatePost(data, i){
     var api_postid = data['StoryId'];
     var api_userid = data['UserId'];
     var api_post_desc = data['txtdata'];
-    var api_post_profpic  = 'https://music-user-image.s3.amazonaws.com/' + api_userid +'.jpg';
+    var api_post_profpic  = 'https://s3.amazonaws.com/music-user-image/' +api_userid + '.jpg' //'https://music-user-image.s3.amazonaws.com/' + api_userid +'.jpg';
     var api_post_pic = data['imagedata'];
     console.log('asdfas', api_post_pic)
     var api_post_music_url = data['musicdata']['url'];
@@ -142,13 +151,12 @@ var profpic = 'https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg';
 
 
 //Home
-var user = "davit666lwh";
 var body = {
       "messages": [
         {
           "request_type": "get_public_news_feed",
           "unconstructed": {
-            "user_id": user
+            "user_id": user_val
           }
         }
       ]
@@ -167,4 +175,20 @@ function getPostInfo(){
 
             })
  
+}
+
+
+function toDataURL(url, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = false;
+  xhr.onload = function() {
+    var reader = new FileReader();
+    reader.onloadend = function() {
+      callback(reader.result);
+    }
+    reader.readAsDataURL(xhr.response);
+  };
+  xhr.open('GET', url);
+  xhr.responseType = 'blob';
+  xhr.send();
 }

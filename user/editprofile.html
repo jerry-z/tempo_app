@@ -2,19 +2,35 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="home.css" rel="stylesheet"  type="text/css">
   <link href="../main.css" rel="stylesheet"  type="text/css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+<!-- API GATEWAY-->
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/axios/dist/axios.standalone.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/CryptoJS/rollups/hmac-sha256.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/CryptoJS/rollups/sha256.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/CryptoJS/components/hmac.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/CryptoJS/components/enc-base64.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/url-template/url-template.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/apiGatewayCore/sigV4Client.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/apiGatewayCore/apiGatewayClient.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/apiGatewayCore/simpleHttpClient.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/lib/apiGatewayCore/utils.js"></script>
+  <script type="text/javascript" src="../apiGateway-js-sdk/apigClient.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
 
   <title>Tempo | Profile</title>
 
 </head>
+  <script type="text/javascript" src="../main.js"></script>
+  <script type="text/javascript" src="user.js"></script>
 
-<body>
+<body onload="loadeditprofile()">
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -24,7 +40,6 @@
   <div class="header" id="myHeader">
     <img class="mb-4" src="../imgs/logo.jpg" alt="" width="150" class="center" >
   </div>
-  <script type="text/javascript" src="../main.js"></script>
 
   <center>
     <div class="card card-header">
@@ -35,10 +50,10 @@
   <div class="card-body text-dark" >
       <div class="image-upload">
               <label for='file-input'>
-                <img id ="account_pic" class="rounded-circle"  style="width: 10rem;height:10rem;margin-top:0.2cm;" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"data-holder-rendered="true">
+                <img id ="account_pic" class="rounded-circle"  style="width: 10rem;height:10rem;margin-top:0.2cm;" src="https://vimcare.com/assets/empty_user-e28be29d09f6ea715f3916ebebb525103ea068eea8842da42b414206c2523d01.png" data-holder-rendered="true">
                 <h4 class="font-weight-bold text-secondary">Change Profile Picture</h4>
               </label>
-              <input id="file-input" onchange="document.getElementById('account_pic').src = window.URL.createObjectURL(this.files[0]);" type="file" name="avatar" accept="image/jpg, image/png">
+              <input id="file-input" onchange="document.getElementById('account_pic').src = window.URL.createObjectURL(this.files[0]);uploadNewProfPic(document.getElementById('file-input').files[0].name);" type="file" name="avatar" accept="image/jpg">
           </div>
 
   </div>
@@ -47,10 +62,10 @@
 
   <div class="form-group">
     <label class ="text-muted" style="margin-right: 15cm" for="exampleFormControlTextarea1"><h4>Bio</h4></label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+    <textarea class="form-control" id="newbio" rows="5"></textarea>
   </div>
 
-  <button style="width: 30rem;" type="submit" class="btn btn-dark"><i class="fa fa-check fa-2x"></i></button>
+  <button style="width: 30rem;" onclick = "updateBioText(document.getElementById('newbio').value);goto_user();" type="button" class="btn btn-dark"><i class="fa fa-check fa-2x"></i></button>
 </form>
 
 </center>
