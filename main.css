@@ -19,7 +19,16 @@ body {
   text-align:center;
   z-index: 1;
 }
-
+.rounded-circle2{
+  position:relative;
+  width:200px;
+  height:200px;
+  border-radius:50%;
+  overflow:hidden;
+  
+}
+.rounded-circle2 img{max-width:100%;}
+}
 .content {
   padding: 16px;
 }
