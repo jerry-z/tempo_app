@@ -102,7 +102,7 @@ function logout(){
 
 
 function updatePost(data, i){
-    let j = i + 1;
+    let j = i;
     var api_postid = data['StoryId'];
     var api_userid = data['UserId'];
     var api_post_desc = data['txtdata'];
