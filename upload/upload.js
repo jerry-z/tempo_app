@@ -28,7 +28,7 @@ function addmusicupload(music){
 }
 //https://music-tmp.s3.amazonaws.com/tmp.jpg
 function uploadImage(filename){
-    toDataURL('/home/jerry/Desktop/' + filename, function(dataUrl) {
+    toDataURL(desktop_path + filename, function(dataUrl) {
     //console.log('RESULT:', dataUrl)
     let base64res = dataUrl.split(',')[1]
 
