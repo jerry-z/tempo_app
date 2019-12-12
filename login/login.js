@@ -60,18 +60,14 @@ function Signup(){
   if (document.getElementById("signupPassword2").value == document.getElementById("signupPassword").value){
   
      apigClient.logSignPost({},signup_body, {}).then(function(result){
-      //let res = result['data']['body']['txt']
+      let res = result['data']['body']['txt']
 
-      console.log(result)
-      location.href()
+      console.log(res, result)
 
-      // if(res== 'passed'){
-      //   user_id = username;
-      //   location.href = '../home/home.html' + '?user_key=' + username;
-      // }
+      if(res== 'account created'){
+        location.href = '../login/signup_thanks.html' ;
+      }
 
-    }).catch( function(result){
-        console.log('fail')
     });
 
   }
